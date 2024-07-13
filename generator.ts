@@ -1,3 +1,4 @@
+#!/usr/bin/env ts-node
 import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, ProcessRetriever } from './helpers';
 
 const flags = new ProcessRetriever(process);

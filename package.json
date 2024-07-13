@@ -9,6 +9,9 @@
     "test": "nodemon --watch src --ext tsx,ts,js,jsx --exec ts-node generator.ts",
     "utils": "nodemon --watch $npm_config_watch --ext tsx,ts,js,jsx --exec ts-node generator.ts --myflag 23 --path ./src/app/styles/util23s.tsx"
   },
+  "bin": {
+    "utils": "./generator.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JimGitFE/css-utils.git"
