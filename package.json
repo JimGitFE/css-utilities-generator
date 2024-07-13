@@ -1,0 +1,36 @@
+{
+  "name": "css-utils",
+  "version": "1.0.0",
+  "description": "css utilities generator",
+  "main": "dist/generator.js",
+  "types": "dist/generator.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "nodemon --watch src --ext tsx,ts,js,jsx --exec ts-node generator.ts",
+    "utils": "nodemon --watch $npm_config_watch --ext tsx,ts,js,jsx --exec ts-node generator.ts --myflag 23 --path ./src/app/styles/util23s.tsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimGitFE/css-utils.git"
+  },
+  "keywords": [
+    "css"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JimGitFE/css-utils/issues"
+  },
+  "homepage": "https://github.com/JimGitFE/css-utils#readme",
+  "devDependencies": {
+    "@babel/generator": "^7.24.5",
+    "@babel/parser": "^7.24.5",
+    "@babel/traverse": "^7.24.5",
+    "@types/babel__generator": "^7.6.8",
+    "@types/babel__traverse": "^7.20.5",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
+ 
