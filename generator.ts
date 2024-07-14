@@ -14,10 +14,10 @@ let rawClasses: string[] = []
 const filePaths = getFilePaths(directory.readFrom);
 filePaths.forEach((path) => {
   
-  // 1.1 Parse into AST
+  // 1.1 Parse .tsx into AST
   const ast = generateAST(path)
   
-  // 1.2 Get All Classes from AST
+  // 1.2 Get all className attributes from AST
   rawClasses = [...extractClasses({ast}), ...rawClasses]
 })
 

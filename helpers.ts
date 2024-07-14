@@ -13,7 +13,14 @@ interface utilityClass {
 /** Match example: m-16, d-f */
 const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|\d+)$/;
 
-/** Classes from attributes node */
+/** Classes from attributes node 
+ * 
+ * @example
+ * ```ts
+ * const class = extractClasses();
+ * console.log(class); // d-f jc-sb ai-c h-100
+ * ```
+ */
 const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] => {
     let classes: string[] = [];
     let allClasses: string = '';
