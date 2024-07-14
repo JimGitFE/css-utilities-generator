@@ -34,7 +34,14 @@ const traverse_1 = __importDefault(require("@babel/traverse"));
 const dictionary_1 = require("./dictionary");
 /** Match example: m-16, d-f */
 const utilClassReg = /^([a-zA-Z]+)-(\w+|\d+)$/;
-/** Classes from attributes node */
+/** Classes from attributes node
+ *
+ * @example
+ * ```ts
+ * const class = extractClasses();
+ * console.log(class); // d-f jc-sb ai-c h-100
+ * ```
+ */
 const extractClasses = ({ ast }) => {
     let classes = [];
     let allClasses = '';

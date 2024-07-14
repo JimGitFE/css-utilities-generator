@@ -31,5 +31,5 @@
     "lib": ["es2016", "dom"], // array.includes wasnt supported
   },
   "include": ["./**/*"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "dist"],
 }

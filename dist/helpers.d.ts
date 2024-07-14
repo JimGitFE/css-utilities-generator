@@ -4,7 +4,14 @@ interface utilityClass {
     classKey: string;
     classValue: string;
 }
-/** Classes from attributes node */
+/** Classes from attributes node
+ *
+ * @example
+ * ```ts
+ * const class = extractClasses();
+ * console.log(class); // d-f jc-sb ai-c h-100
+ * ```
+ */
 declare const extractClasses: ({ ast }: {
     ast: parser.ParseResult<File> | any;
 }) => string[];
