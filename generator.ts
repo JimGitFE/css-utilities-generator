@@ -5,7 +5,7 @@ const flags = new ProcessRetriever(process);
 
 /** Directories. Write: generated css utils. Read: classNames to interpret */
 const directory = {
-  writeTo: flags.get("writeTo") || "src/styles/utilities.css",
+  writeTo: flags.get("writeTo") || "styles/utilities.css",
   readFrom: flags.get("readFrom") || "/"
 }
 let rawClasses: string[] = []
