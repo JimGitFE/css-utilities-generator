@@ -10,15 +10,13 @@ interface utilityClass {
     classValue: string // The full CSS property value, ex. [10, '10px']
 }
 
-/** Match example: m-16, d-f */
-const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|\d+)$/;
-
 /** Classes from attributes node 
  * 
+ * @returns {string[]} - Array of classes
  * @example
  * ```ts
  * const class = extractClasses();
- * console.log(class); // d-f jc-sb ai-c h-100
+ * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
 const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] => {
@@ -63,17 +61,41 @@ const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] 
   
 /** Classes filter duplicates & utilities dictionary matches
  * @returns {string[]} - Dictionary matched classes
+ * @example
+ * ```ts
+ * const classes = filterClasses(['m-10', 'd-f', 'jc-sb', 'ai-c', 'h-100', 'h--spacing-4']);
+ * console.log(classes); // [{fullClass: 'm-10', classKey: 'margin', classValue: '10px'}, ...]
+ * ```
  */
-const filterClasses = (classes: string[]): utilityClass[] => {
+const filterClasses = (classes: string[]): utilityClass[] => {  
     let utilityClasses: utilityClass[] = [];
+  
+    /** @example ["h--spacing-4", "h", "spacing-4"] */
+    const utilVarValReg: RegExp = /^(\w+)--([\w-]+)$/
+    /** @example ["m-16", "m", "16"] */
+    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|\d+)$/
 
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
 
         // Utility Dictionary Match
         const matchClass: RegExpMatchArray | null = singleClass.match(utilClassReg) // word-word|number
+        const matchVariable: RegExpMatchArray | null = singleClass.match(utilVarValReg)
 
-        if (matchClass) {
+        if (matchVariable) {
+          const [ classKey, classValue ] =  [matchVariable[1], matchVariable[2]]
+
+          // Not Duplicate
+          const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
+
+          if (!isDuplicate) {
+            utilityClasses.push({
+              fullClass: singleClass,
+              classKey: classKey,
+              classValue: `var(--${classValue})`
+            })
+          }
+        } else if (matchClass) {
         const [ classKey, classValue ] =  [matchClass[1], matchClass[2]]
 
         // Not Duplicate
