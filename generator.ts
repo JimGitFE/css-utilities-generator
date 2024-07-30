@@ -11,10 +11,8 @@ const directory = {
 let rawClasses: string[] = []
 
 // 1 Get File paths
-console.log(directory.readFrom)
 const filePaths = getFilePaths(directory.readFrom);
 filePaths.forEach((path) => {
-  console.log(path)
   
   // 1.1 Parse .tsx into AST
   const ast = generateAST(path)

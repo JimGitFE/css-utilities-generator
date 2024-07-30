@@ -11,10 +11,8 @@ const directory = {
 };
 let rawClasses = [];
 // 1 Get File paths
-console.log(directory.readFrom);
 const filePaths = (0, helpers_1.getFilePaths)(directory.readFrom);
 filePaths.forEach((path) => {
-    console.log(path);
     // 1.1 Parse .tsx into AST
     const ast = (0, helpers_1.generateAST)(path);
     // 1.2 Get all className attributes from AST
