@@ -32,14 +32,13 @@ const fs_1 = __importDefault(require("fs"));
 const parser = __importStar(require("@babel/parser"));
 const traverse_1 = __importDefault(require("@babel/traverse"));
 const dictionary_1 = require("./dictionary");
-/** Match example: m-16, d-f */
-const utilClassReg = /^([a-zA-Z]+)-(\w+|\d+)$/;
 /** Classes from attributes node
  *
+ * @returns {string[]} - Array of classes
  * @example
  * ```ts
  * const class = extractClasses();
- * console.log(class); // d-f jc-sb ai-c h-100
+ * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
 const extractClasses = ({ ast }) => {
@@ -78,14 +77,36 @@ const extractClasses = ({ ast }) => {
 exports.extractClasses = extractClasses;
 /** Classes filter duplicates & utilities dictionary matches
  * @returns {string[]} - Dictionary matched classes
+ * @example
+ * ```ts
+ * const classes = filterClasses(['m-10', 'd-f', 'jc-sb', 'ai-c', 'h-100', 'h--spacing-4']);
+ * console.log(classes); // [{fullClass: 'm-10', classKey: 'margin', classValue: '10px'}, ...]
+ * ```
  */
 const filterClasses = (classes) => {
     let utilityClasses = [];
+    /** @example ["h--spacing-4", "h", "spacing-4"] */
+    const utilVarValReg = /^(\w+)--([\w-]+)$/;
+    /** @example ["m-16", "m", "16"] */
+    const utilClassReg = /^([a-zA-Z]+)-(\w+|\d+)$/;
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
         // Utility Dictionary Match
         const matchClass = singleClass.match(utilClassReg); // word-word|number
-        if (matchClass) {
+        const matchVariable = singleClass.match(utilVarValReg);
+        if (matchVariable) {
+            const [classKey, classValue] = [matchVariable[1], matchVariable[2]];
+            // Not Duplicate
+            const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
+            if (!isDuplicate) {
+                utilityClasses.push({
+                    fullClass: singleClass,
+                    classKey: classKey,
+                    classValue: `var(--${classValue})`
+                });
+            }
+        }
+        else if (matchClass) {
             const [classKey, classValue] = [matchClass[1], matchClass[2]];
             // Not Duplicate
             const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);

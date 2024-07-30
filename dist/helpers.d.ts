@@ -6,10 +6,11 @@ interface utilityClass {
 }
 /** Classes from attributes node
  *
+ * @returns {string[]} - Array of classes
  * @example
  * ```ts
  * const class = extractClasses();
- * console.log(class); // d-f jc-sb ai-c h-100
+ * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
 declare const extractClasses: ({ ast }: {
@@ -17,6 +18,11 @@ declare const extractClasses: ({ ast }: {
 }) => string[];
 /** Classes filter duplicates & utilities dictionary matches
  * @returns {string[]} - Dictionary matched classes
+ * @example
+ * ```ts
+ * const classes = filterClasses(['m-10', 'd-f', 'jc-sb', 'ai-c', 'h-100', 'h--spacing-4']);
+ * console.log(classes); // [{fullClass: 'm-10', classKey: 'margin', classValue: '10px'}, ...]
+ * ```
  */
 declare const filterClasses: (classes: string[]) => utilityClass[];
 declare const writeCSS: ({ classes, dir }: {
