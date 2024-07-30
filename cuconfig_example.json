@@ -5,5 +5,7 @@
     {
         "fs": {"name": "font-size", "valueExtension": "abc"},
         "fi": {"name": "filter", "valueExtension": ""}
-    }
+    },
+    "writeTo": "src/styles/utilities.css",
+    "readFrom": "src/"
 }

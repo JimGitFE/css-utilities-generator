@@ -172,7 +172,7 @@ function* readAllFiles(dir: string): Generator<string> {
 
 const getFilePaths = (dir: string, extensions: string[] = ["tsx", "ts", "js", "jsx"]): string[] => {
     let files: string[] = [];
-    for (const file of readAllFiles('src')) {
+    for (const file of readAllFiles(dir)) {
       if (extensions.some(ext => file.endsWith(ext))) {
           files.push(file.replace(/\\/g, '/'));
       }
@@ -196,6 +196,8 @@ interface Config {
   units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
   extendKeys?: {[key:string]:{name: string, valueExtension: string}};
   extendValues?: Record<string, string>;
+  writeTo?: string;
+  readFrom?: string;
 }
 
 function readConfigFile(): Config {
