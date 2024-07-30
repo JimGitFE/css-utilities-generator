@@ -1,0 +1,8 @@
+{
+    "onlyDictionary": true,
+    "units": "rem",
+    "extendKeys": {
+        "fs": {"name": "font-size", "type": "abc"},
+        "fi": {"name": "filter", "type": ""}
+    }
+}

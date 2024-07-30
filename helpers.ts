@@ -88,7 +88,11 @@ const filterClasses = (classes: string[]): utilityClass[] => {
           // Not Duplicate
           const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
 
-          if (!isDuplicate) {
+          // Key exist in dictionary
+          const inDictionary = Object.keys(shortKeys).some((abKey) => abKey === classKey)
+          const ifExists = readConfigFile()?.onlyDictionary ? inDictionary : true
+          
+          if (!isDuplicate && ifExists) {
             // Generate Valid utilityClass
             utilityClasses.push({
               fullClass: singleClass,
@@ -104,8 +108,12 @@ const filterClasses = (classes: string[]): utilityClass[] => {
 
         // Check if prop value is a number
         const valueIsNum = /^\d+$/.test(String(classValue))
-
-        if (!isDuplicate) {
+        
+        // Key & Value exist in dictionary
+        const inDictionary = Object.keys(shortKeys).some((abKey) => abKey === classKey) && (valueIsNum || Object.keys(shortValues).some((abValue) => abValue === classValue))
+        const ifExists = readConfigFile()?.onlyDictionary ? inDictionary : true
+        
+        if (!isDuplicate && ifExists) {
             // Generate Valid utilityClass
             utilityClasses.push({
             fullClass: singleClass,
@@ -183,5 +191,23 @@ const generateAST = (filePath: string): parser.ParseResult<File> | any => {
   });
 }
 
+interface Config {
+  onlyDictionary?: boolean;
+  units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
+  extendKeys?: {[key:string]:{name: string, type: string}};
+  extendValues?: Record<string, string>;
+}
+
+function readConfigFile(): Config {
+  const filePath = "./cuconfig.json";
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    const config = JSON.parse(data);
+    return config;
+  } catch (err) {
+    return {};
+  }
+}
+
 export type { utilityClass }
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS }
+export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile }
