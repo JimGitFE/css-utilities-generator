@@ -32,6 +32,18 @@ const dictionary: Abreviations  = {
         mxc: 'max-content',
         mnc: 'min-content',
 
+        /** Other */
+        h: 'hidden',
+        v: 'visible',
+        s: 'scroll',
+        // n: 'none',
+        // a: 'auto',
+
+        /** Position */
+        re: 'relative',
+        ab: 'absolute',
+        fi: 'fixed',
+        sti: 'sticky',
     },
     shortKeys:{
     /** Margin */
@@ -91,7 +103,22 @@ const dictionary: Abreviations  = {
     gg: {name: 'grid-gap', type: 'px'},
     gc: {name: 'grid-column', type: ''},
     gr: {name: 'grid-row', type: ''},
-    g: {name: 'grid', type: ''}
+    g: {name: 'grid', type: ''},
+
+    /** Border */
+    b: {name: 'border', type: 'px solid'},
+    bt: {name: 'border-top', type: 'px solid'},
+    bb: {name: 'border-bottom', type: 'px solid'},
+    bl: {name: 'border-left', type: 'px solid'},
+    br: {name: 'border-right', type: 'px solid'},
+
+    /** Other */
+    o: {name: 'opacity', type: '%'},
+    ov: {name: 'overflow', type: ''},
+
+    /** Position */
+    pos: {name: 'position', type: ''},
+
 }
 }
 const [shortKeys, shortValues] = [dictionary.shortKeys, dictionary.shortValues];
