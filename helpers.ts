@@ -89,9 +89,10 @@ const filterClasses = (classes: string[]): utilityClass[] => {
           const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
 
           if (!isDuplicate) {
+            // Generate Valid utilityClass
             utilityClasses.push({
               fullClass: singleClass,
-              classKey: classKey,
+              classKey: shortKeys[classKey]?.name || classKey,
               classValue: `var(--${classValue})`
             })
           }
@@ -104,16 +105,12 @@ const filterClasses = (classes: string[]): utilityClass[] => {
         // Check if prop value is a number
         const valueIsNum = /^\d+$/.test(String(classValue))
 
-        // Exist in dictionary
-        const ifExists = Object.keys(shortKeys).some((abKey) => abKey === classKey) && (valueIsNum || Object.keys(shortValues).some((abValue) => abValue === classValue))
-        
-        if (ifExists && !isDuplicate) {
-          
+        if (!isDuplicate) {
             // Generate Valid utilityClass
             utilityClasses.push({
             fullClass: singleClass,
-            classKey: shortKeys[classKey].name,
-            classValue: `${valueIsNum?classValue+shortKeys[classKey].type:shortValues[classValue]}`
+            classKey: shortKeys[classKey]?.name || classKey,
+            classValue: `${valueIsNum?classValue+shortKeys[classKey].type:(shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
             })
         }
         }
