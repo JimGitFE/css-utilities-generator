@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.shortValues = exports.shortKeys = void 0;
+const helpers_1 = require("./helpers");
+const units = (0, helpers_1.readConfigFile)().units || "px";
+const { extendKeys, extendValues } = (0, helpers_1.readConfigFile)();
 const dictionary = {
     shortValues: {
         // Usual but not specific to: 
@@ -39,73 +42,73 @@ const dictionary = {
     },
     shortKeys: {
         /** Margin */
-        m: { name: 'margin', type: 'px' },
-        ml: { name: 'margin-left', type: 'px' },
-        mr: { name: 'margin-right', type: 'px' },
-        mt: { name: 'margin-top', type: 'px' },
-        mb: { name: 'margin-bottom', type: 'px' },
+        m: { name: 'margin', valueExtension: units },
+        ml: { name: 'margin-left', valueExtension: units },
+        mr: { name: 'margin-right', valueExtension: units },
+        mt: { name: 'margin-top', valueExtension: units },
+        mb: { name: 'margin-bottom', valueExtension: units },
         /** Padding */
-        p: { name: 'padding', type: 'px' },
-        pl: { name: 'padding-left', type: 'px' },
-        pr: { name: 'padding-right', type: 'px' },
-        pt: { name: 'padding-top', type: 'px' },
-        pb: { name: 'padding-bottom', type: 'px' },
+        p: { name: 'padding', valueExtension: units },
+        pl: { name: 'padding-left', valueExtension: units },
+        pr: { name: 'padding-right', valueExtension: units },
+        pt: { name: 'padding-top', valueExtension: units },
+        pb: { name: 'padding-bottom', valueExtension: units },
         /** Width */
-        w: { name: 'width', type: 'px' },
-        h: { name: 'height', type: 'px' },
-        mnw: { name: 'min-width', type: 'px' },
-        mnh: { name: 'min-height', type: 'px' },
-        mxw: { name: 'max-width', type: 'px' },
-        mxh: { name: 'max-height', type: 'px' },
+        w: { name: 'width', valueExtension: units },
+        h: { name: 'height', valueExtension: units },
+        mnw: { name: 'min-width', valueExtension: units },
+        mnh: { name: 'min-height', valueExtension: units },
+        mxw: { name: 'max-width', valueExtension: units },
+        mxh: { name: 'max-height', valueExtension: units },
         /** Font */
-        f: { name: 'font', type: '' },
-        fs: { name: 'font-size', type: 'px' },
-        fw: { name: 'font-weight', type: '' },
-        fl: { name: 'font-style', type: '' },
-        ft: { name: 'font-family', type: '' },
-        fv: { name: 'font-variant', type: '' },
-        fh: { name: 'font-stretch', type: '' },
-        d: { name: 'display', type: '' },
-        jc: { name: 'justify-content', type: '' },
-        ai: { name: 'align-items', type: '' },
-        as: { name: 'align-self', type: '' },
-        ac: { name: 'align-content', type: '' },
+        f: { name: 'font', valueExtension: '' },
+        fs: { name: 'font-size', valueExtension: units },
+        fw: { name: 'font-weight', valueExtension: '' },
+        fl: { name: 'font-style', valueExtension: '' },
+        ft: { name: 'font-family', valueExtension: '' },
+        fv: { name: 'font-variant', valueExtension: '' },
+        fh: { name: 'font-stretch', valueExtension: '' },
+        d: { name: 'display', valueExtension: '' },
+        jc: { name: 'justify-content', valueExtension: '' },
+        ai: { name: 'align-items', valueExtension: '' },
+        as: { name: 'align-self', valueExtension: '' },
+        ac: { name: 'align-content', valueExtension: '' },
         /** Flex */
         // fs: {name: 'flex-shrink', type: ''},
         // fg: {name: 'flex-grow', type: ''},
-        fd: { name: 'flex-direction', type: '' },
+        fd: { name: 'flex-direction', valueExtension: '' },
         // fb: {name: 'flex-basis', type: ''},
         // fl: {name: 'flex', type: ''},
         // fw: {name: 'flex-wrap', type: ''},
-        z: { name: 'z-index', type: '' },
+        z: { name: 'z-index', valueExtension: '' },
         /* Grid */
-        gtc: { name: 'grid-template-columns', type: '' },
-        gtr: { name: 'grid-template-rows', type: '' },
-        gta: { name: 'grid-template-areas', type: '' },
-        gt: { name: 'grid-template', type: '' },
-        ga: { name: 'grid-auto-columns', type: '' },
-        gar: { name: 'grid-auto-rows', type: '' },
-        gac: { name: 'grid-auto-flow', type: '' },
-        gg: { name: 'grid-gap', type: 'px' },
-        gc: { name: 'grid-column', type: '' },
-        gr: { name: 'grid-row', type: '' },
-        g: { name: 'grid', type: '' },
+        gtc: { name: 'grid-template-columns', valueExtension: '' },
+        gtr: { name: 'grid-template-rows', valueExtension: '' },
+        gta: { name: 'grid-template-areas', valueExtension: '' },
+        gt: { name: 'grid-template', valueExtension: '' },
+        ga: { name: 'grid-auto-columns', valueExtension: '' },
+        gar: { name: 'grid-auto-rows', valueExtension: '' },
+        gac: { name: 'grid-auto-flow', valueExtension: '' },
+        gg: { name: 'grid-gap', valueExtension: units },
+        gc: { name: 'grid-column', valueExtension: '' },
+        gr: { name: 'grid-row', valueExtension: '' },
+        g: { name: 'grid', valueExtension: '' },
         /** Border */
-        b: { name: 'border', type: 'px solid' },
-        bt: { name: 'border-top', type: 'px solid' },
-        bb: { name: 'border-bottom', type: 'px solid' },
-        bl: { name: 'border-left', type: 'px solid' },
-        br: { name: 'border-right', type: 'px solid' },
+        b: { name: 'border', valueExtension: 'px solid' },
+        bt: { name: 'border-top', valueExtension: 'px solid' },
+        bb: { name: 'border-bottom', valueExtension: 'px solid' },
+        bl: { name: 'border-left', valueExtension: 'px solid' },
+        br: { name: 'border-right', valueExtension: 'px solid' },
         /** Other */
-        o: { name: 'opacity', type: '%' },
-        ov: { name: 'overflow', type: '' },
+        o: { name: 'opacity', valueExtension: '%' },
+        ov: { name: 'overflow', valueExtension: '' },
         /** Position */
-        pos: { name: 'position', type: '' },
+        pos: { name: 'position', valueExtension: '' },
         /** Color */
-        c: { name: 'color', type: '' },
+        c: { name: 'color', valueExtension: '' },
     }
 };
-const [shortKeys, shortValues] = [dictionary.shortKeys, dictionary.shortValues];
+const [shortKeys, shortValues] = [Object.assign(Object.assign({}, dictionary.shortKeys), extendKeys), Object.assign(Object.assign({}, dictionary.shortValues), extendValues)];
 exports.shortKeys = shortKeys;
 exports.shortValues = shortValues;
 //# sourceMappingURL=dictionary.js.map

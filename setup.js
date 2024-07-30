@@ -34,6 +34,6 @@ function addScriptToPackageJson(scriptName, scriptCommand) {
 }
 
 const scriptName = 'utils';
-const scriptCommand = 'nodemon --watch ./ --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utils/generator.ts';
+const scriptCommand = 'nodemon --watch ./ --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utilities-generator/dist/generator.js';
 
 addScriptToPackageJson(scriptName, scriptCommand);

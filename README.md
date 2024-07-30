@@ -20,7 +20,7 @@ TypeScript utility package that generates a utilities.css file on demand with sh
 First, install the css-utilities-generator package and its dependencies in your project:
 ```bash
 # 1 npm
-> npm install css-utilities-generator
+> npm i -D css-utilities-generator
 ```
 The package includes a setup script that will add a necessary configuration to your package.json.
 ```bash

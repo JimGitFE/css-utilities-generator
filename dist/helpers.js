@@ -27,6 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.writeCSS = exports.filterClasses = exports.extractClasses = exports.generateAST = exports.getFilePaths = exports.ProcessRetriever = void 0;
+exports.readConfigFile = readConfigFile;
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const parser = __importStar(require("@babel/parser"));
@@ -87,10 +88,11 @@ const filterClasses = (classes) => {
     let utilityClasses = [];
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg = /^(\w+)--([\w-]+)$/;
-    /** @example ["m-16", "m", "16"] */
-    const utilClassReg = /^([a-zA-Z]+)-(\w+|\d+)$/;
+    /** @example ["m-1.6", "m", "1.6"] */
+    const utilClassReg = /^([a-zA-Z]+)-(\w+|[0-9.]+)$/;
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
+        var _a, _b, _c, _d;
         // Utility Dictionary Match
         const matchClass = singleClass.match(utilClassReg); // word-word|number
         const matchVariable = singleClass.match(utilVarValReg);
@@ -98,10 +100,14 @@ const filterClasses = (classes) => {
             const [classKey, classValue] = [matchVariable[1], matchVariable[2]];
             // Not Duplicate
             const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
-            if (!isDuplicate) {
+            // Key exist in dictionary
+            const inDictionary = Object.keys(dictionary_1.shortKeys).some((abKey) => abKey === classKey);
+            const ifExists = ((_a = readConfigFile()) === null || _a === void 0 ? void 0 : _a.onlyDictionary) ? inDictionary : true;
+            if (!isDuplicate && ifExists) {
+                // Generate Valid utilityClass
                 utilityClasses.push({
                     fullClass: singleClass,
-                    classKey: classKey,
+                    classKey: ((_b = dictionary_1.shortKeys[classKey]) === null || _b === void 0 ? void 0 : _b.name) || classKey,
                     classValue: `var(--${classValue})`
                 });
             }
@@ -112,14 +118,15 @@ const filterClasses = (classes) => {
             const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
             // Check if prop value is a number
             const valueIsNum = /^\d+$/.test(String(classValue));
-            // Exist in dictionary
-            const ifExists = Object.keys(dictionary_1.shortKeys).some((abKey) => abKey === classKey) && (valueIsNum || Object.keys(dictionary_1.shortValues).some((abValue) => abValue === classValue));
-            if (ifExists && !isDuplicate) {
+            // Key & Value exist in dictionary
+            const inDictionary = Object.keys(dictionary_1.shortKeys).some((abKey) => abKey === classKey) && (valueIsNum || Object.keys(dictionary_1.shortValues).some((abValue) => abValue === classValue));
+            const ifExists = ((_c = readConfigFile()) === null || _c === void 0 ? void 0 : _c.onlyDictionary) ? inDictionary : true;
+            if (!isDuplicate && ifExists) {
                 // Generate Valid utilityClass
                 utilityClasses.push({
                     fullClass: singleClass,
-                    classKey: dictionary_1.shortKeys[classKey].name,
-                    classValue: `${valueIsNum ? classValue + dictionary_1.shortKeys[classKey].type : dictionary_1.shortValues[classValue]}`
+                    classKey: ((_d = dictionary_1.shortKeys[classKey]) === null || _d === void 0 ? void 0 : _d.name) || classKey,
+                    classValue: `${valueIsNum ? classValue + dictionary_1.shortKeys[classKey].valueExtension : (dictionary_1.shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
                 });
             }
         }
@@ -165,7 +172,7 @@ function* readAllFiles(dir) {
 }
 const getFilePaths = (dir, extensions = ["tsx", "ts", "js", "jsx"]) => {
     let files = [];
-    for (const file of readAllFiles('src')) {
+    for (const file of readAllFiles(dir)) {
         if (extensions.some(ext => file.endsWith(ext))) {
             files.push(file.replace(/\\/g, '/'));
         }
@@ -182,4 +189,15 @@ const generateAST = (filePath) => {
     });
 };
 exports.generateAST = generateAST;
+function readConfigFile() {
+    const filePath = "./cuconfig.json";
+    try {
+        const data = fs_1.default.readFileSync(filePath, 'utf8');
+        const config = JSON.parse(data);
+        return config;
+    }
+    catch (err) {
+        return {};
+    }
+}
 //# sourceMappingURL=helpers.js.map

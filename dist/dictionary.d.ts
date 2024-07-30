@@ -1,10 +1,13 @@
 declare const shortKeys: {
-    [key: string]: {
+    [x: string]: {
         name: string;
-        type: string;
+        valueExtension: string;
+    } | {
+        name: string;
+        valueExtension: string;
     };
 }, shortValues: {
-    [key: string]: string;
+    [x: string]: string;
 };
 export { shortKeys, shortValues };
 //# sourceMappingURL=dictionary.d.ts.map

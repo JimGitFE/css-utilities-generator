@@ -29,6 +29,7 @@
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     
     "lib": ["es2016", "dom"], // array.includes wasnt supported
+    "types": [ "node" ],
   },
   "include": ["./**/*"],
   "exclude": ["node_modules", "dist"],
