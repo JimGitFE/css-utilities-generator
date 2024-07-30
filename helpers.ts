@@ -72,8 +72,8 @@ const filterClasses = (classes: string[]): utilityClass[] => {
   
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg: RegExp = /^(\w+)--([\w-]+)$/
-    /** @example ["m-16", "m", "16"] */
-    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|\d+)$/
+    /** @example ["m-1.6", "m", "1.6"] */
+    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.]+)$/
 
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
