@@ -2,7 +2,7 @@
     "onlyDictionary": true,
     "units": "rem",
     "extendKeys": {
-        "fs": {"name": "font-size", "type": "abc"},
-        "fi": {"name": "filter", "type": ""}
+        "fs": {"name": "font-size", "valueExtension": "abc"},
+        "fi": {"name": "filter", "valueExtension": ""}
     }
 }

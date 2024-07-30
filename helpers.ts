@@ -118,7 +118,7 @@ const filterClasses = (classes: string[]): utilityClass[] => {
             utilityClasses.push({
             fullClass: singleClass,
             classKey: shortKeys[classKey]?.name || classKey,
-            classValue: `${valueIsNum?classValue+shortKeys[classKey].type:(shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
+            classValue: `${valueIsNum?classValue+shortKeys[classKey].valueExtension:(shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
             })
         }
         }
@@ -194,7 +194,7 @@ const generateAST = (filePath: string): parser.ParseResult<File> | any => {
 interface Config {
   onlyDictionary?: boolean;
   units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
-  extendKeys?: {[key:string]:{name: string, type: string}};
+  extendKeys?: {[key:string]:{name: string, valueExtension: string}};
   extendValues?: Record<string, string>;
 }
 
