@@ -12,17 +12,37 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JimGitFE/css-utils.git"
+    "url": "git+https://github.com/JimGitFE/css-utilities-generator.git"
   },
   "keywords": [
-    "css"
+    "css",
+    "Utility-First CSS",
+    "CSS Utility Framework",
+    "Utility Class Generator",
+    "CSS Class Shortcuts",
+    "Custom CSS Utilities",
+    "Dynamic Style Management",
+    "On-the-Fly CSS Generation",
+    "Utility-Driven Styling",
+    "Adaptive CSS",
+    "Live CSS Generation",
+    "Responsive Utility Classes",
+    "Automated CSS Tools",
+    "Configurable CSS Utilities",
+    "Reusable CSS Classes",
+    "Efficient CSS Creation",
+    "Inline Style Utilities",
+    "Real-Time CSS Updates",
+    "Simplified CSS Generation",
+    "Utility Class Automation",
+    "Dynamic Class Names"
   ],
   "author": "JimGitFE",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JimGitFE/css-utils/issues"
+    "url": "https://github.com/JimGitFE/css-utilities-generator/issues"
   },
-  "homepage": "https://github.com/JimGitFE/css-utils#readme",
+  "homepage": "https://github.com/JimGitFE/css-utilities-generator#readme",
   "devDependencies": {
     "@babel/generator": "^7.24.5",
     "@babel/parser": "^7.24.5",
