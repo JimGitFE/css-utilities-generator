@@ -1,4 +1,4 @@
-# 🎨 css-utils [![NPM](https://img.shields.io/npm/v/css-utils.svg)](https://www.npmjs.com/package/css-utils)
+# 🎨 css-utilities-generator [![NPM](https://img.shields.io/npm/v/css-utilities-generator.svg)](https://www.npmjs.com/package/css-utilities-generator)
 
 ```html
 <div className="d-f jc-sb mxw-1050">
@@ -6,26 +6,28 @@
   <p>Description</p>
 </div>
 ```
+> some-file.tsx
 ```css
 .d-f { display: flex; }
 .jc-sb { justify-content: space-between; }
 .mxw-1050 { max-width: 1050px; }
 ```
-> /cuconfig.json
+> utilities.css
+
 TypeScript utility package that generates a utilities.css file on demand with shorthand class names for common CSS properties. By using intuitive notations like d-f (display: flex) as values for className attributes inside your jsx, this package streamlines your styling process, making your main CSS structure cleaner, reusable and more maintainable while ensuring consistent, efficient application of styles across your project.
 
 ## Installation & Setup (Auto)
-First, install the css-utils package and its dependencies in your project:
+First, install the css-utilities-generator package and its dependencies in your project:
 ```bash
 # 1 npm
-> npm install css-utils
+> npm install css-utilities-generator
 ```
 The package includes a setup script that will add a necessary configuration to your package.json.
 ```bash
 # 2 Run the following command to add the script to your project:
-> node node_modules/css-utils/setup.js
+> node node_modules/css-utilities-generator/setup.js
 ```
-Script adds a new npm script to your package.json file called "utils" with the following value, "nodemon --watch src --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utils/generator.ts", to handle watching for file changes.
+Script adds a new npm script to your package.json file called "utils" with the following value, "nodemon --watch src --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utilities-generator/generator.ts", to handle watching for file changes.
 
 Now, you can start watching for changes in your src directory and automatically regenerate the CSS utilities. Run the following command to start the watcher:
 ```bash
