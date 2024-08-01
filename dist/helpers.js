@@ -76,6 +76,9 @@ const extractClasses = ({ ast }) => {
     return classes;
 };
 exports.extractClasses = extractClasses;
+function inDictionary(dictionary, shortKey) {
+    return Object.keys(dictionary).includes(shortKey);
+}
 /** Classes filter duplicates & utilities dictionary matches
  * @returns {string[]} - Dictionary matched classes
  * @example
@@ -85,11 +88,12 @@ exports.extractClasses = extractClasses;
  * ```
  */
 const filterClasses = (classes) => {
+    const { onlyDictionary: notAcceptAny, acceptAnyKey, acceptAnyValue } = readConfigFile();
     let utilityClasses = [];
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg = /^(\w+)--([\w-]+)$/;
     /** @example ["m-1.6", "m", "1.6"] */
-    const utilClassReg = /^([a-zA-Z]+)-(\w+|[0-9.]+)$/;
+    const utilClassReg = /^([a-zA-Z]+)-(\w+|[0-9.%]+)$/;
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
         var _a, _b, _c, _d;
@@ -101,32 +105,34 @@ const filterClasses = (classes) => {
             // Not Duplicate
             const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
             // Key exist in dictionary
-            const inDictionary = Object.keys(dictionary_1.shortKeys).some((abKey) => abKey === classKey);
-            const ifExists = ((_a = readConfigFile()) === null || _a === void 0 ? void 0 : _a.onlyDictionary) ? inDictionary : true;
-            if (!isDuplicate && ifExists) {
+            const valueCheck = (!notAcceptAny || acceptAnyKey) || (inDictionary(dictionary_1.shortKeys, classKey));
+            if (!isDuplicate && (valueCheck)) {
                 // Generate Valid utilityClass
                 utilityClasses.push({
                     fullClass: singleClass,
-                    classKey: ((_b = dictionary_1.shortKeys[classKey]) === null || _b === void 0 ? void 0 : _b.name) || classKey,
+                    classKey: ((_a = dictionary_1.shortKeys[classKey]) === null || _a === void 0 ? void 0 : _a.name) || classKey,
                     classValue: `var(--${classValue})`
                 });
             }
         }
         else if (matchClass) {
             const [classKey, classValue] = [matchClass[1], matchClass[2]];
+            // Unit extension if applicable, "px" - "px solid" - "%" - ""
+            const unitFromFullKey = (_b = Object.values(dictionary_1.shortKeys).find(k => k.name === classKey)) === null || _b === void 0 ? void 0 : _b.valueExtension;
+            const extension = unitFromFullKey || ((_c = dictionary_1.shortKeys[classKey]) === null || _c === void 0 ? void 0 : _c.valueExtension) || "";
             // Not Duplicate
             const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
             // Check if prop value is a number
             const valueIsNum = /^\d+$/.test(String(classValue));
-            // Key & Value exist in dictionary
-            const inDictionary = Object.keys(dictionary_1.shortKeys).some((abKey) => abKey === classKey) && (valueIsNum || Object.keys(dictionary_1.shortValues).some((abValue) => abValue === classValue));
-            const ifExists = ((_c = readConfigFile()) === null || _c === void 0 ? void 0 : _c.onlyDictionary) ? inDictionary : true;
-            if (!isDuplicate && ifExists) {
+            // Key & Value exist in dictionary || or use them as is
+            const keyCheck = (!notAcceptAny || acceptAnyKey) || inDictionary(dictionary_1.shortKeys, classKey);
+            const valueCheck = (!notAcceptAny || acceptAnyValue) || (valueIsNum || inDictionary(dictionary_1.shortValues, classValue));
+            if (!isDuplicate && (keyCheck && valueCheck)) {
                 // Generate Valid utilityClass
                 utilityClasses.push({
                     fullClass: singleClass,
                     classKey: ((_d = dictionary_1.shortKeys[classKey]) === null || _d === void 0 ? void 0 : _d.name) || classKey,
-                    classValue: `${valueIsNum ? classValue + dictionary_1.shortKeys[classKey].valueExtension : (dictionary_1.shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
+                    classValue: `${valueIsNum ? (`${classValue}${extension}`) : (dictionary_1.shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
                 });
             }
         }

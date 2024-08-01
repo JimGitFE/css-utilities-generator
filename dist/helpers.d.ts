@@ -37,7 +37,15 @@ export declare class ProcessRetriever {
 declare const getFilePaths: (dir: string, extensions?: string[]) => string[];
 declare const generateAST: (filePath: string) => parser.ParseResult<File> | any;
 interface Config {
+    /**
+     * Only accept classes that are in the dictionary and number values or directory variables
+    */
     onlyDictionary?: boolean;
+    acceptAnyKey?: boolean;
+    /**
+     * Accept (value + unit) or any value
+    */
+    acceptAnyValue?: boolean;
     units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
     extendKeys?: {
         [key: string]: {
