@@ -39,6 +39,8 @@ Now, you can start watching for changes in your src directory and automatically 
 ```javascript
 {
     "onlyDictionary": true, /* Matching only dictionary or extension properties, Defaults to false */
+    "acceptAnyKey": false,
+    "acceptAnyValue": false,
     "units": "rem", /* Defines unit for those css properties with numeric values or others, Defaults to "px" */
     "extendKeys": /* Extend default dictionary abbreviations */ 
     {
