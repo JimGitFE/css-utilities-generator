@@ -59,6 +59,11 @@ const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] 
     return classes;
 }
   
+
+function inDictionary(dictionary: Record<string, any>, shortKey: string): boolean {
+  return Object.keys(dictionary).includes(shortKey);
+}
+
 /** Classes filter duplicates & utilities dictionary matches
  * @returns {string[]} - Dictionary matched classes
  * @example
@@ -68,12 +73,13 @@ const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] 
  * ```
  */
 const filterClasses = (classes: string[]): utilityClass[] => {  
+    const {onlyDictionary: notAcceptAny, acceptAnyKey, acceptAnyValue} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg: RegExp = /^(\w+)--([\w-]+)$/
     /** @example ["m-1.6", "m", "1.6"] */
-    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.]+)$/
+    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.%]+)$/
 
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
@@ -81,7 +87,6 @@ const filterClasses = (classes: string[]): utilityClass[] => {
         // Utility Dictionary Match
         const matchClass: RegExpMatchArray | null = singleClass.match(utilClassReg) // word-word|number
         const matchVariable: RegExpMatchArray | null = singleClass.match(utilVarValReg)
-
         if (matchVariable) {
           const [ classKey, classValue ] =  [matchVariable[1], matchVariable[2]]
 
@@ -89,10 +94,9 @@ const filterClasses = (classes: string[]): utilityClass[] => {
           const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
 
           // Key exist in dictionary
-          const inDictionary = Object.keys(shortKeys).some((abKey) => abKey === classKey)
-          const ifExists = readConfigFile()?.onlyDictionary ? inDictionary : true
+          const valueCheck = (!notAcceptAny || acceptAnyKey) || (inDictionary(shortKeys, classKey))
           
-          if (!isDuplicate && ifExists) {
+          if (!isDuplicate && (valueCheck)) {
             // Generate Valid utilityClass
             utilityClasses.push({
               fullClass: singleClass,
@@ -102,6 +106,10 @@ const filterClasses = (classes: string[]): utilityClass[] => {
           }
         } else if (matchClass) {
         const [ classKey, classValue ] =  [matchClass[1], matchClass[2]]
+        
+        // Unit extension if applicable, "px" - "px solid" - "%" - ""
+        const unitFromFullKey = Object.values(shortKeys).find(k=>k.name === classKey)?.valueExtension
+        const extension = unitFromFullKey || shortKeys[classKey]?.valueExtension || ""
 
         // Not Duplicate
         const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
@@ -109,16 +117,17 @@ const filterClasses = (classes: string[]): utilityClass[] => {
         // Check if prop value is a number
         const valueIsNum = /^\d+$/.test(String(classValue))
         
-        // Key & Value exist in dictionary
-        const inDictionary = Object.keys(shortKeys).some((abKey) => abKey === classKey) && (valueIsNum || Object.keys(shortValues).some((abValue) => abValue === classValue))
-        const ifExists = readConfigFile()?.onlyDictionary ? inDictionary : true
+        // Key & Value exist in dictionary || or use them as is
+        const keyCheck = (!notAcceptAny || acceptAnyKey) || inDictionary(shortKeys, classKey)
+        const valueCheck = (!notAcceptAny || acceptAnyValue) || (valueIsNum || inDictionary(shortValues, classValue))
+
         
-        if (!isDuplicate && ifExists) {
+        if (!isDuplicate && (keyCheck && valueCheck)) {
             // Generate Valid utilityClass
             utilityClasses.push({
             fullClass: singleClass,
             classKey: shortKeys[classKey]?.name || classKey,
-            classValue: `${valueIsNum?classValue+shortKeys[classKey].valueExtension:(shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
+            classValue: `${valueIsNum?(`${classValue}${extension}`):(shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
             })
         }
         }
@@ -192,7 +201,15 @@ const generateAST = (filePath: string): parser.ParseResult<File> | any => {
 }
 
 interface Config {
+  /**
+   * Only accept classes that are in the dictionary and number values or directory variables
+  */
   onlyDictionary?: boolean;
+  acceptAnyKey?: boolean;
+  /**
+   * Accept (value + unit) or any value
+  */
+  acceptAnyValue?: boolean;
   units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
   extendKeys?: {[key:string]:{name: string, valueExtension: string}};
   extendValues?: Record<string, string>;
