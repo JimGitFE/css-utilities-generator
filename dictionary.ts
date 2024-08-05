@@ -66,12 +66,12 @@ const dictionary: Abreviations  = {
     pb: {name: 'padding-bottom', valueExtension: units},
 
     /** Width */
-    w: {name: 'width', valueExtension: units},
-    h: {name: 'height', valueExtension: units},
-    mnw: {name: 'min-width', valueExtension: units},
-    mnh: {name: 'min-height', valueExtension: units},
-    mxw: {name: 'max-width', valueExtension: units},
-    mxh: {name: 'max-height', valueExtension: units},
+    w: {name: 'width', valueExtension: "%"},
+    h: {name: 'height', valueExtension: "%"},
+    mnw: {name: 'min-width', valueExtension: "%"},
+    mnh: {name: 'min-height', valueExtension: "%"},
+    mxw: {name: 'max-width', valueExtension: "%"},
+    mxh: {name: 'max-height', valueExtension: "%"},
     
     /** Font */
     f: {name: 'font', valueExtension: ''},
@@ -112,10 +112,11 @@ const dictionary: Abreviations  = {
 
     /** Border */
     b: {name: 'border', valueExtension: 'px solid'},
-    bt: {name: 'border-top', valueExtension: 'px solid'},
-    bb: {name: 'border-bottom', valueExtension: 'px solid'},
-    bl: {name: 'border-left', valueExtension: 'px solid'},
-    br: {name: 'border-right', valueExtension: 'px solid'},
+    bto: {name: 'border-top', valueExtension: 'px solid'},
+    bbo: {name: 'border-bottom', valueExtension: 'px solid'},
+    ble: {name: 'border-left', valueExtension: 'px solid'},
+    bri: {name: 'border-right', valueExtension: 'px solid'},
+    br: {name: 'border-radius', valueExtension: units},
 
     /** Other */
     o: {name: 'opacity', valueExtension: '%'},
