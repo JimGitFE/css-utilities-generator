@@ -5,8 +5,10 @@
   "main": "dist/generator.js",
   "types": "dist/generator.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "ts-node tests/test.ts"
+    "build": "rimraf -rf ./dist/ && tsc",
+    "test": "npm run build && jest",
+    "ts-test": "ts-node tests/playground.ts",
+    "git-test": "jest"
   },
   "bin": {
     "gen-utils": "./generator.ts"
@@ -17,6 +19,7 @@
   },
   "keywords": [
     "css",
+    "front-end",
     "Utility-First CSS",
     "CSS Utility Framework",
     "Utility Class Generator",
@@ -36,7 +39,8 @@
     "Real-Time CSS Updates",
     "Simplified CSS Generation",
     "Utility Class Automation",
-    "Dynamic Class Names"
+    "Dynamic Class Names",
+    "styling"
   ],
   "author": "JimGitFE",
   "license": "ISC",
@@ -51,7 +55,9 @@
     "@types/babel__generator": "^7.6.8",
     "@types/babel__traverse": "^7.20.5",
     "@types/node": "^22.0.0",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.4",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
   }
