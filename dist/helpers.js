@@ -88,7 +88,7 @@ function inDictionary(dictionary, shortKey) {
  * ```
  */
 const filterClasses = (classes) => {
-    const { onlyDictionary: notAcceptAny, acceptAnyKey, acceptAnyValue } = readConfigFile();
+    const { onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true } = readConfigFile();
     let utilityClasses = [];
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg = /^(\w+)--([\w-]+)$/;
