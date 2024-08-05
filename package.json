@@ -7,7 +7,8 @@
   "scripts": {
     "build": "rimraf -rf ./dist/ && tsc",
     "test": "npm run build && jest",
-    "ts-test": "ts-node tests/playground.ts"
+    "ts-test": "ts-node tests/playground.ts",
+    "git-test": "jest"
   },
   "bin": {
     "gen-utils": "./generator.ts"
