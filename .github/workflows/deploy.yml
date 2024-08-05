@@ -26,7 +26,7 @@ jobs:
         run: npm run git-test
 
       - name: Remove cuconfig.json
-        run: rimraf -rf cuconfig.json
+        run: npm run rm-config
 
       - name: Publish to NPM
         run: npm publish --provenance --access public
