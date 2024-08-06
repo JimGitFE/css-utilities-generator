@@ -47,8 +47,8 @@ Now, you can start watching for changes in your src directory and automatically 
         "fs": {"name": "font-size", "valueExtension": "vw"}, /* Would match for fs className */
         "fi": {"name": "filter", "valueExtension": ""} /* Would match for fs className */
     },
-    "writeTo": "./src/styles/utilities.css", /* Where to write generated css file, Defaults to "./src/styles/utilities.css" */
-    "readFrom": "./src/" /* Where to parse - interpret files from, Defaults to "./src/" */
+    "writeTo": "./styles/utilities.css", /* Where to write generated css file, Defaults to "./styles/utilities.css" */
+    "readFrom": "./" /* Where to parse - interpret files from, Defaults to "./" */
 }
 ```
 > /cuconfig.json

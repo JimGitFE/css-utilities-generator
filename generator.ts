@@ -5,8 +5,8 @@ import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, rea
 
 /** Directories. Write: generated css utils. Read: classNames to interpret */
 const directory = {
-  writeTo: readConfigFile()?.writeTo || "./src/styles/utilities.css",
-  readFrom: readConfigFile()?.readFrom || "./src/"
+  writeTo: readConfigFile()?.writeTo || "./styles/utilities.css",
+  readFrom: readConfigFile()?.readFrom || "./"
 }
 let rawClasses: string[] = []
 
@@ -25,4 +25,4 @@ filePaths.forEach((path) => {
 const classes = filterClasses(rawClasses)
 
 // 3 Translate to CSS & writeTo path
-writeCSS({classes, dir: directory.writeTo})
+writeCSS({classes, filePath: directory.writeTo})
