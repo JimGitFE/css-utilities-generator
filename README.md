@@ -31,7 +31,7 @@ Script adds a new npm script to your package.json file called "utils" with the f
 
 Run the following command to start the watcher:
 ```bash
-# 3 Generate css file on save:
+# 3 Run the following command (generates css utilities on save):
 > npm run utils
 ```
 Now, you can start watching for changes in your src directory and automatically regenerate the CSS utilities. 
