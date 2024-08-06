@@ -62,7 +62,6 @@ Example of jsx elements with above configuration set, variables usage and their 
 ```html
 <div className="d-f ml-40">
     <h1 className="fs-2 c--brand-primary">
-        Hello World!
 ...
 ```
 > /src/some-file.tsx
