@@ -1,12 +1,12 @@
 #!/usr/bin/env ts-node
-import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, ProcessRetriever, readConfigFile } from './helpers';
+import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile } from './helpers';
 
 // const flags = new ProcessRetriever(process);
 
 /** Directories. Write: generated css utils. Read: classNames to interpret */
 const directory = {
-  writeTo: readConfigFile()?.writeTo || "styles/utilities.css",
-  readFrom: readConfigFile()?.readFrom || "/"
+  writeTo: readConfigFile()?.writeTo || "./src/styles/utilities.css",
+  readFrom: readConfigFile()?.readFrom || "./src/"
 }
 let rawClasses: string[] = []
 
