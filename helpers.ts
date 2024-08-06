@@ -143,7 +143,12 @@ const writeCSS = ({classes, dir}: {classes: utilityClass[], dir: string}) => {
     classes.forEach(({ fullClass, classKey, classValue }) => {
       utilitiesCSS += `.${fullClass} { ${classKey}: ${classValue}; }\n`;
     });
-  
+
+    // // Create the directory if it doesn't exist
+    // if (!fs.existsSync(dir)) {
+    //   fs.mkdirSync(dir, { recursive: true });
+    // }
+
     // 4 Write to File
     fs.writeFileSync(dir, utilitiesCSS);
 }

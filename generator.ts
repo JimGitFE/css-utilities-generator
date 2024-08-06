@@ -21,7 +21,7 @@ filePaths.forEach((path) => {
   rawClasses = [...extractClasses({ast}), ...rawClasses]
 })
 
-// 2 Filter out none utility classes
+// 2 Filter utility classes, ex. "flex d-f ml-20" => "d-f ml-20"
 const classes = filterClasses(rawClasses)
 
 // 3 Translate to CSS & writeTo path
