@@ -6,15 +6,6 @@ on:
     branches: [main]
 
 jobs:
-  version:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Get version
-        id: get_version
-        run: echo "::set-output name=version::$(node -p "require('./package.json').version")"
-        shell: bash
-
   tagging:
     runs-on: ubuntu-latest
 
@@ -30,10 +21,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: get-package-json-version
+        id: get-version
+        uses: BeaconBrigade/package-json-version@v0.3.1
+
       - name: Create Tag
         run: |
-          VERSION=$(node -p "require('./package.json').version")
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git tag "v$VERSION"
+          git tag "v${{ steps.get-version.outputs.version }}"
           git push --tags
+
+              
