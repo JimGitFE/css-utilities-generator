@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  tagging:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
       - name: Create Tag
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "rymsjfjrys@gmail.com"
+          git config --local user.name "JimGitFE"
           git tag "v$VERSION"
           git push --tags
