@@ -25,9 +25,9 @@ declare const extractClasses: ({ ast }: {
  * ```
  */
 declare const filterClasses: (classes: string[]) => utilityClass[];
-declare const writeCSS: ({ classes, dir }: {
+declare const writeCSS: ({ classes, filePath }: {
     classes: utilityClass[];
-    dir: string;
+    filePath: string;
 }) => void;
 export declare class ProcessRetriever {
     private args;

@@ -140,14 +140,19 @@ const filterClasses = (classes) => {
     return utilityClasses;
 };
 exports.filterClasses = filterClasses;
-const writeCSS = ({ classes, dir }) => {
+const writeCSS = ({ classes, filePath }) => {
     let utilitiesCSS = '';
     // 3 Format utilityClass into .CSS
     classes.forEach(({ fullClass, classKey, classValue }) => {
         utilitiesCSS += `.${fullClass} { ${classKey}: ${classValue}; }\n`;
     });
+    // Create the directory if it doesn't exist
+    const dir = path_1.default.dirname(filePath);
+    if (!fs_1.default.existsSync(dir)) {
+        fs_1.default.mkdirSync(dir, { recursive: true });
+    }
     // 4 Write to File
-    fs_1.default.writeFileSync(dir, utilitiesCSS);
+    fs_1.default.writeFileSync(filePath, utilitiesCSS);
 };
 exports.writeCSS = writeCSS;
 class ProcessRetriever {
@@ -165,24 +170,25 @@ class ProcessRetriever {
     }
 }
 exports.ProcessRetriever = ProcessRetriever;
-function* readAllFiles(dir) {
-    const files = fs_1.default.readdirSync(dir, { withFileTypes: true });
-    for (const file of files) {
-        if (file.isDirectory()) {
-            yield* readAllFiles(path_1.default.join(dir, file.name));
-        }
-        else {
-            yield path_1.default.join(dir, file.name);
-        }
-    }
+const fs_2 = require("fs");
+const path_2 = require("path");
+function readDir(dir, exclude = []) {
+    return (0, fs_2.readdirSync)(dir, { withFileTypes: true })
+        .filter((dirent) => !exclude.includes(dirent.name))
+        .flatMap((dirent) => {
+        const filePath = (0, path_2.join)(dir, dirent.name);
+        return dirent.isDirectory() ? readDir(filePath, exclude) : filePath;
+    });
 }
+
 const getFilePaths = (dir, extensions = ["tsx", "ts", "js", "jsx"]) => {
     let files = [];
-    for (const file of readAllFiles(dir)) {
+    for (const file of readDir(dir, ["node_modules", ".git", "asdsda"])) {
         if (extensions.some(ext => file.endsWith(ext))) {
             files.push(file.replace(/\\/g, '/'));
         }
     }
+    console.log("finial files", files)
     return files;
 };
 exports.getFilePaths = getFilePaths;
