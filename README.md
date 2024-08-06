@@ -39,17 +39,17 @@ Now, you can start watching for changes in your src directory and automatically 
 ## Configuration file (Defaults)
 ```javascript
 {
-    "onlyDictionary": true, /* Matching only dictionary or extension properties */
+    "onlyDictionary": true, /* Matching only dictionary or extension properties, Defaults to false */
     "acceptAnyKey": false,
     "acceptAnyValue": true,
-    "units": "rem", /* Defines unit for those css properties with numeric values or others */
+    "units": "rem", /* Defines unit for those css properties with numeric values or others, Defaults to "px" */
     "extendKeys": /* Extend default dictionary abbreviations */ 
     {
         "fs": {"name": "font-size", "valueExtension": "vw"}, /* Would match for fs className */
         "fi": {"name": "filter", "valueExtension": ""} /* Would match for fs className */
     },
-    "writeTo": "./styles/utilities.css", /* Where to write generated css file */
-    "readFrom": "./", /* Where to parse - interpret files from */
+    "writeTo": "./styles/utilities.css", /* Where to write generated css file, Defaults to "./styles/utilities.css" */
+    "readFrom": "./", /* Where to parse - interpret files from, Defaults to "./" */
     "extensions": ["tsx", "ts", "js", "jsx"] /* Read className attributes from files with extensions in Array */
     "exclude": ["node_modules", ".git"] /* Exclude directories from having files parsed, traversed ...  */
 }
@@ -62,6 +62,7 @@ Example of jsx elements with above configuration set, variables usage and their 
 ```html
 <div className="d-f ml-40">
     <h1 className="fs-2 c--brand-primary">
+        Hello World!
 ...
 ```
 > /src/some-file.tsx
