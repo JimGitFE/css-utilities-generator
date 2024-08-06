@@ -6,6 +6,15 @@ on:
     branches: [main]
 
 jobs:
+  version:
+    runs-on: ubuntu-latest
+
+    steps:
+  - name: Get version
+    id: get_version
+    run: echo "::set-output name=version::$(node -p "require('./package.json').version")"
+    shell: bash
+
   tagging:
     runs-on: ubuntu-latest
 
@@ -24,7 +33,7 @@ jobs:
       - name: Create Tag
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          git config --local user.email "rymsjfjrys@gmail.com"
-          git config --local user.name "JimGitFE"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
           git tag "v$VERSION"
           git push --tags
