@@ -31,5 +31,3 @@ jobs:
           git config --local user.name "GitHub Action"
           git tag "v${{ steps.get-version.outputs.version }}"
           git push --tags
-
-              
