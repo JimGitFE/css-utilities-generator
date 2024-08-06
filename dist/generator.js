@@ -6,8 +6,8 @@ const helpers_1 = require("./helpers");
 // const flags = new ProcessRetriever(process);
 /** Directories. Write: generated css utils. Read: classNames to interpret */
 const directory = {
-    writeTo: ((_a = (0, helpers_1.readConfigFile)()) === null || _a === void 0 ? void 0 : _a.writeTo) || "styles/utilities.css",
-    readFrom: ((_b = (0, helpers_1.readConfigFile)()) === null || _b === void 0 ? void 0 : _b.readFrom) || "/"
+    writeTo: ((_a = (0, helpers_1.readConfigFile)()) === null || _a === void 0 ? void 0 : _a.writeTo) || "./styles/utilities.css",
+    readFrom: ((_b = (0, helpers_1.readConfigFile)()) === null || _b === void 0 ? void 0 : _b.readFrom) || "./"
 };
 let rawClasses = [];
 // 1 Get File paths
@@ -18,8 +18,8 @@ filePaths.forEach((path) => {
     // 1.2 Get all className attributes from AST
     rawClasses = [...(0, helpers_1.extractClasses)({ ast }), ...rawClasses];
 });
-// 2 Filter out none utility classes
+// 2 Filter utility classes, ex. "flex d-f ml-20" => "d-f ml-20"
 const classes = (0, helpers_1.filterClasses)(rawClasses);
 // 3 Translate to CSS & writeTo path
-(0, helpers_1.writeCSS)({ classes, dir: directory.writeTo });
+(0, helpers_1.writeCSS)({ classes, filePath: directory.writeTo });
 //# sourceMappingURL=generator.js.map

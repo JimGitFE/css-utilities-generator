@@ -3,10 +3,11 @@ name: Node Countinuous Integration
 on:
   push:
     branches:
-      - "*"
+      - development
   pull_request:
     branches:
-      - "*"
+      - main
+      - development
 
 jobs:
   test:

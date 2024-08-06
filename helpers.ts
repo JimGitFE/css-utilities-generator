@@ -136,16 +136,22 @@ const filterClasses = (classes: string[]): utilityClass[] => {
     return utilityClasses;
 }
 
-const writeCSS = ({classes, dir}: {classes: utilityClass[], dir: string}) => {
+const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: string}) => {
     let utilitiesCSS: string = '';
 
     // 3 Format utilityClass into .CSS
     classes.forEach(({ fullClass, classKey, classValue }) => {
       utilitiesCSS += `.${fullClass} { ${classKey}: ${classValue}; }\n`;
     });
-  
+
+    // Create the directory if it doesn't exist
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
     // 4 Write to File
-    fs.writeFileSync(dir, utilitiesCSS);
+    fs.writeFileSync(filePath, utilitiesCSS);
 }
 
 export class ProcessRetriever {
@@ -166,22 +172,18 @@ export class ProcessRetriever {
     }
 }
 
-
-function* readAllFiles(dir: string): Generator<string> {
-  const files = fs.readdirSync(dir, { withFileTypes: true });
-
-  for (const file of files) {
-    if (file.isDirectory()) {
-      yield* readAllFiles(path.join(dir, file.name));
-    } else {
-      yield path.join(dir, file.name);
-    }
-  }
+function readDir(dir: string, exclude: string[] = []): any {
+  return fs.readdirSync(dir, { withFileTypes: true })
+    .filter((dirent: fs.Dirent) => !exclude.includes(dirent.name))
+    .flatMap((dirent: fs.Dirent) => {
+      const filePath = path.join(dir, dirent.name);
+      return dirent.isDirectory() ? readDir(filePath, exclude) : filePath;
+    });
 }
 
 const getFilePaths = (dir: string, extensions: string[] = ["tsx", "ts", "js", "jsx"]): string[] => {
     let files: string[] = [];
-    for (const file of readAllFiles(dir)) {
+    for (const file of readDir(dir, ["node_modules", ".git", "asdsda"])) {
       if (extensions.some(ext => file.endsWith(ext))) {
           files.push(file.replace(/\\/g, '/'));
       }

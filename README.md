@@ -24,7 +24,7 @@ First, install the css-utilities-generator package and its dependencies in your 
 ```
 The package includes a setup script that will add a necessary configuration to your package.json.
 ```bash
-# 2 Run the following command to add the script to your project:
+# 2 Run the following script to add the command to your project:
 > node node_modules/css-utilities-generator/setup.js
 ```
 Script adds a new npm script to your package.json file called "utils" with the following value, "nodemon --watch src --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utilities-generator/generator.ts", to handle watching for file changes.
@@ -48,8 +48,8 @@ Now, you can start watching for changes in your src directory and automatically 
         "fs": {"name": "font-size", "valueExtension": "vw"}, /* Would match for fs className */
         "fi": {"name": "filter", "valueExtension": ""} /* Would match for fs className */
     },
-    "writeTo": "src/styles/utilities.css", /* Where to write generated css file, Defaults to "styles/utilities.css" */
-    "readFrom": "src/" /* Where to parse - interpret files from, Defaults to "/" */
+    "writeTo": "./styles/utilities.css", /* Where to write generated css file, Defaults to "./styles/utilities.css" */
+    "readFrom": "./" /* Where to parse - interpret files from, Defaults to "./" */
 }
 ```
 > /cuconfig.json

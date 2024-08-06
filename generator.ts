@@ -1,12 +1,12 @@
 #!/usr/bin/env ts-node
-import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, ProcessRetriever, readConfigFile } from './helpers';
+import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile } from './helpers';
 
 // const flags = new ProcessRetriever(process);
 
 /** Directories. Write: generated css utils. Read: classNames to interpret */
 const directory = {
-  writeTo: readConfigFile()?.writeTo || "styles/utilities.css",
-  readFrom: readConfigFile()?.readFrom || "/"
+  writeTo: readConfigFile()?.writeTo || "./styles/utilities.css",
+  readFrom: readConfigFile()?.readFrom || "./"
 }
 let rawClasses: string[] = []
 
@@ -21,8 +21,8 @@ filePaths.forEach((path) => {
   rawClasses = [...extractClasses({ast}), ...rawClasses]
 })
 
-// 2 Filter out none utility classes
+// 2 Filter utility classes, ex. "flex d-f ml-20" => "d-f ml-20"
 const classes = filterClasses(rawClasses)
 
 // 3 Translate to CSS & writeTo path
-writeCSS({classes, dir: directory.writeTo})
+writeCSS({classes, filePath: directory.writeTo})
