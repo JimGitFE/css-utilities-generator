@@ -73,7 +73,7 @@ function inDictionary(dictionary: Record<string, any>, shortKey: string): boolea
  * ```
  */
 const filterClasses = (classes: string[]): utilityClass[] => {  
-    const {onlyDictionary: notAcceptAny, acceptAnyKey, acceptAnyValue} = readConfigFile()
+    const {onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
     /** @example ["h--spacing-4", "h", "spacing-4"] */

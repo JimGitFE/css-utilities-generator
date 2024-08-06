@@ -37,4 +37,5 @@ console.log((0, helpers_1.filterClasses)(["h-100"])); // {height: 100px}
 console.log((0, helpers_1.filterClasses)(["h-mxc"])); // {height: max-content}
 console.log((0, helpers_1.filterClasses)(["h-100%"])); //
 console.log((0, helpers_1.filterClasses)(["height-100"])); //
-//# sourceMappingURL=test.js.map
+console.log((0, helpers_1.filterClasses)(["h-100", "bto-2"])); //
+//# sourceMappingURL=playground.js.map

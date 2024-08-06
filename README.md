@@ -29,18 +29,19 @@ The package includes a setup script that will add a necessary configuration to y
 ```
 Script adds a new npm script to your package.json file called "utils" with the following value, "nodemon --watch src --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utilities-generator/generator.ts", to handle watching for file changes.
 
-Now, you can start watching for changes in your src directory and automatically regenerate the CSS utilities. Run the following command to start the watcher:
+Run the following command to start the watcher:
 ```bash
 # 3 Generate css file on save:
 > npm run utils
 ```
+Now, you can start watching for changes in your src directory and automatically regenerate the CSS utilities. 
 
-## Configuration file
+## Configuration file (Defaults)
 ```javascript
 {
     "onlyDictionary": true, /* Matching only dictionary or extension properties, Defaults to false */
     "acceptAnyKey": false,
-    "acceptAnyValue": false,
+    "acceptAnyValue": true,
     "units": "rem", /* Defines unit for those css properties with numeric values or others, Defaults to "px" */
     "extendKeys": /* Extend default dictionary abbreviations */ 
     {

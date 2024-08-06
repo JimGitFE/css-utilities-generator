@@ -88,7 +88,7 @@ function inDictionary(dictionary, shortKey) {
  * ```
  */
 const filterClasses = (classes) => {
-    const { onlyDictionary: notAcceptAny, acceptAnyKey, acceptAnyValue } = readConfigFile();
+    const { onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true } = readConfigFile();
     let utilityClasses = [];
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg = /^(\w+)--([\w-]+)$/;
@@ -170,17 +170,14 @@ class ProcessRetriever {
     }
 }
 exports.ProcessRetriever = ProcessRetriever;
-const fs_2 = require("fs");
-const path_2 = require("path");
 function readDir(dir, exclude = []) {
-    return (0, fs_2.readdirSync)(dir, { withFileTypes: true })
+    return fs_1.default.readdirSync(dir, { withFileTypes: true })
         .filter((dirent) => !exclude.includes(dirent.name))
         .flatMap((dirent) => {
-        const filePath = (0, path_2.join)(dir, dirent.name);
+        const filePath = path_1.default.join(dir, dirent.name);
         return dirent.isDirectory() ? readDir(filePath, exclude) : filePath;
     });
 }
-
 const getFilePaths = (dir, extensions = ["tsx", "ts", "js", "jsx"]) => {
     let files = [];
     for (const file of readDir(dir, ["node_modules", ".git", "asdsda"])) {
@@ -188,7 +185,6 @@ const getFilePaths = (dir, extensions = ["tsx", "ts", "js", "jsx"]) => {
             files.push(file.replace(/\\/g, '/'));
         }
     }
-    console.log("finial files", files)
     return files;
 };
 exports.getFilePaths = getFilePaths;
