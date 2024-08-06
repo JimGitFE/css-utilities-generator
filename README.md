@@ -39,17 +39,17 @@ Now, you can start watching for changes in your src directory and automatically 
 ## Configuration file (Defaults)
 ```javascript
 {
-    "onlyDictionary": true, /* Matching only dictionary or extension properties, Defaults to false */
+    "onlyDictionary": true, /* Matching only dictionary or extension properties */
     "acceptAnyKey": false,
     "acceptAnyValue": true,
-    "units": "rem", /* Defines unit for those css properties with numeric values or others, Defaults to "px" */
+    "units": "rem", /* Defines unit for those css properties with numeric values or others */
     "extendKeys": /* Extend default dictionary abbreviations */ 
     {
         "fs": {"name": "font-size", "valueExtension": "vw"}, /* Would match for fs className */
         "fi": {"name": "filter", "valueExtension": ""} /* Would match for fs className */
     },
-    "writeTo": "./styles/utilities.css", /* Where to write generated css file, Defaults to "./styles/utilities.css" */
-    "readFrom": "./", /* Where to parse - interpret files from, Defaults to "./" */
+    "writeTo": "./styles/utilities.css", /* Where to write generated css file */
+    "readFrom": "./", /* Where to parse - interpret files from */
     "extensions": ["tsx", "ts", "js", "jsx"] /* Read className attributes from files with extensions in Array */
     "exclude": ["node_modules", ".git"] /* Exclude directories from having files parsed, traversed ...  */
 }
