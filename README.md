@@ -49,7 +49,9 @@ Now, you can start watching for changes in your src directory and automatically 
         "fi": {"name": "filter", "valueExtension": ""} /* Would match for fs className */
     },
     "writeTo": "./styles/utilities.css", /* Where to write generated css file, Defaults to "./styles/utilities.css" */
-    "readFrom": "./" /* Where to parse - interpret files from, Defaults to "./" */
+    "readFrom": "./", /* Where to parse - interpret files from, Defaults to "./" */
+    "extensions": ["tsx", "ts", "js", "jsx"] /* Read className attributes from files with extensions in Array */
+    "exclude": ["node_modules", ".git"] /* Exclude directories from having files parsed, traversed ...  */
 }
 ```
 > /cuconfig.json

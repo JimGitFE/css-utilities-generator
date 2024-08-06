@@ -181,9 +181,10 @@ function readDir(dir: string, exclude: string[] = []): any {
     });
 }
 
-const getFilePaths = (dir: string, extensions: string[] = ["tsx", "ts", "js", "jsx"]): string[] => {
+const getFilePaths = (dir: string): string[] => {
+    const {extensions = ["tsx", "ts", "js", "jsx"], exclude = ["node_modules", ".git"]} = readConfigFile()
     let files: string[] = [];
-    for (const file of readDir(dir, ["node_modules", ".git", "asdsda"])) {
+    for (const file of readDir(dir, exclude)) {
       if (extensions.some(ext => file.endsWith(ext))) {
           files.push(file.replace(/\\/g, '/'));
       }
@@ -217,6 +218,8 @@ interface Config {
   extendValues?: Record<string, string>;
   writeTo?: string;
   readFrom?: string;
+  extensions?: string[];
+  exclude?: string[];
 }
 
 function readConfigFile(): Config {
