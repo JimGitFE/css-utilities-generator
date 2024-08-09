@@ -49,3 +49,7 @@ console.log(filterClasses(["h-mxc"])) // {height: max-content}
 console.log(filterClasses(["h-100%"])) //
 console.log(filterClasses(["height-100"])) //
 console.log(filterClasses(["h-100", "bto-2"])) //
+
+import { watchWelcome } from "../helpers";
+
+watchWelcome()

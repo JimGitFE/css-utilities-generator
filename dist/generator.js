@@ -3,7 +3,8 @@
 var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("./helpers");
-// const flags = new ProcessRetriever(process);
+/** Welcome: Current Version */
+(0, helpers_1.watchWelcome)();
 /** Directories. Write: generated css utils. Read: classNames to interpret */
 const directory = {
     writeTo: ((_a = (0, helpers_1.readConfigFile)()) === null || _a === void 0 ? void 0 : _a.writeTo) || "./styles/utilities.css",

@@ -38,4 +38,6 @@ console.log((0, helpers_1.filterClasses)(["h-mxc"])); // {height: max-content}
 console.log((0, helpers_1.filterClasses)(["h-100%"])); //
 console.log((0, helpers_1.filterClasses)(["height-100"])); //
 console.log((0, helpers_1.filterClasses)(["h-100", "bto-2"])); //
+const helpers_2 = require("../helpers");
+(0, helpers_2.watchWelcome)();
 //# sourceMappingURL=playground.js.map

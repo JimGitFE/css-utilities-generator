@@ -26,13 +26,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.writeCSS = exports.filterClasses = exports.extractClasses = exports.generateAST = exports.getFilePaths = exports.ProcessRetriever = void 0;
+exports.watchWelcome = exports.writeCSS = exports.filterClasses = exports.extractClasses = exports.generateAST = exports.getFilePaths = exports.ProcessRetriever = void 0;
 exports.readConfigFile = readConfigFile;
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const parser = __importStar(require("@babel/parser"));
 const traverse_1 = __importDefault(require("@babel/traverse"));
 const dictionary_1 = require("./dictionary");
+/**
+ * Log Version at console
+ * npm run utils
+ */
+const watchWelcome = () => {
+    const { version } = JSON.parse(fs_1.default.readFileSync(path_1.default.resolve(__dirname, '../package.json'), 'utf8'));
+    console.log(`\nUtility CSS Generator v${version}\n`);
+};
+exports.watchWelcome = watchWelcome;
 /** Classes from attributes node
  *
  * @returns {string[]} - Array of classes
@@ -90,10 +99,10 @@ function inDictionary(dictionary, shortKey) {
 const filterClasses = (classes) => {
     const { onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true } = readConfigFile();
     let utilityClasses = [];
+    /** @example ["m-1.6:hover", "m", "1.6"] */
+    const utilClassReg = /^([a-zA-Z]+)-(\w+|[0-9.%]+)(?::[a-zA-Z]+)?$/;
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg = /^(\w+)--([\w-]+)$/;
-    /** @example ["m-1.6", "m", "1.6"] */
-    const utilClassReg = /^([a-zA-Z]+)-(\w+|[0-9.%]+)$/;
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
         var _a, _b, _c, _d;
@@ -178,9 +187,10 @@ function readDir(dir, exclude = []) {
         return dirent.isDirectory() ? readDir(filePath, exclude) : filePath;
     });
 }
-const getFilePaths = (dir, extensions = ["tsx", "ts", "js", "jsx"]) => {
+const getFilePaths = (dir) => {
+    const { extensions = ["tsx", "ts", "js", "jsx"], exclude = ["node_modules", ".git"] } = readConfigFile();
     let files = [];
-    for (const file of readDir(dir, ["node_modules", ".git", "asdsda"])) {
+    for (const file of readDir(dir, exclude)) {
         if (extensions.some(ext => file.endsWith(ext))) {
             files.push(file.replace(/\\/g, '/'));
         }

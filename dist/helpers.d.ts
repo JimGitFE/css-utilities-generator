@@ -4,6 +4,11 @@ interface utilityClass {
     classKey: string;
     classValue: string;
 }
+/**
+ * Log Version at console
+ * npm run utils
+ */
+declare const watchWelcome: () => void;
 /** Classes from attributes node
  *
  * @returns {string[]} - Array of classes
@@ -34,7 +39,7 @@ export declare class ProcessRetriever {
     constructor(process: NodeJS.Process);
     get(flagName: string): undefined;
 }
-declare const getFilePaths: (dir: string, extensions?: string[]) => string[];
+declare const getFilePaths: (dir: string) => string[];
 declare const generateAST: (filePath: string) => parser.ParseResult<File> | any;
 interface Config {
     /**
@@ -56,8 +61,10 @@ interface Config {
     extendValues?: Record<string, string>;
     writeTo?: string;
     readFrom?: string;
+    extensions?: string[];
+    exclude?: string[];
 }
 declare function readConfigFile(): Config;
 export type { utilityClass };
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile };
+export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, watchWelcome };
 //# sourceMappingURL=helpers.d.ts.map
