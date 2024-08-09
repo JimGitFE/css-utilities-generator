@@ -10,13 +10,9 @@ interface utilityClass {
     classValue: string // The full CSS property value, ex. [10, '10px']
 }
 
-/**
- * Log Version at console
- * npm run utils
- */
-const watchWelcome = () => {
-  const { version } = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8'));
-  console.log(`\nUtility CSS Generator v${version}\n`);
+/** Get the package version from package.json */
+const packageVersion = () => {
+  return JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')).version
 }
 
 /** Classes from attributes node 
@@ -244,4 +240,4 @@ function readConfigFile(): Config {
 }
 
 export type { utilityClass }
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, watchWelcome }
+export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, packageVersion }

@@ -1,18 +1,15 @@
 #!/usr/bin/env ts-node
-import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, watchWelcome } from './helpers';
+import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, packageVersion } from './helpers';
 
-/** Welcome: Current Version */
-watchWelcome()
+/** run utils welcome - current version */
+console.log(`\nUtility CSS Generator v${packageVersion()}\n`);
 
 /** Directories. Write: generated css utils. Read: classNames to interpret */
-const directory = {
-  writeTo: readConfigFile()?.writeTo || "./styles/utilities.css",
-  readFrom: readConfigFile()?.readFrom || "./"
-}
+const { writeTo = "./styles/utilities.css", readFrom = "./" } = readConfigFile()
 let rawClasses: string[] = []
 
 // 1 Get File paths
-const filePaths = getFilePaths(directory.readFrom);
+const filePaths = getFilePaths(readFrom);
 filePaths.forEach((path) => {
   
   // 1.1 Parse .tsx into AST
@@ -26,4 +23,4 @@ filePaths.forEach((path) => {
 const classes = filterClasses(rawClasses)
 
 // 3 Translate to CSS & writeTo path
-writeCSS({classes, filePath: directory.writeTo})
+writeCSS({classes, filePath: writeTo})
