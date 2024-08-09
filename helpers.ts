@@ -20,12 +20,11 @@ const packageVersion = () => {
  * @returns {string[]} - Array of classes
  * @example
  * ```ts
- * const class = extractClasses();
+ * const class = getClassNames();
  * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
-const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] => {
-    let classes: string[] = [];
+const getClassNames = ({ast}: {ast: parser.ParseResult<File> | any}): string => {
     let allClasses: string = '';
 
     // 1 Traverse the AST (Abstract Syntax Tree)
@@ -56,12 +55,11 @@ const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] 
             // 4 format into array of string classes
             allClasses += nodeClass() + " ";
             allClasses.slice(0, -1)
-            classes = allClasses.split(' ');
           }
         },
     });
-
-    return classes;
+    
+    return allClasses;
 }
   
 
@@ -77,7 +75,8 @@ function inDictionary(dictionary: Record<string, any>, shortKey: string): boolea
  * console.log(classes); // [{fullClass: 'm-10', classKey: 'margin', classValue: '10px'}, ...]
  * ```
  */
-const filterClasses = (classes: string[]): utilityClass[] => {  
+const filterClasses = (classes: string[]): utilityClass[] => {
+    console.log("received", classes)
     const {onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
@@ -242,4 +241,4 @@ function readConfigFile(): Config {
 }
 
 export type { utilityClass }
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, packageVersion }
+export { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion }

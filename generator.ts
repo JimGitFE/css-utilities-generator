@@ -1,23 +1,27 @@
 #!/usr/bin/env ts-node
-import { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, packageVersion } from './helpers';
+import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion } from './helpers';
 
 /** run utils welcome - current version */
 console.log(`\nUtility CSS Generator v${packageVersion()}\n`);
 
 /** Directories. Write: generated css utils. Read: classNames to interpret */
 const { writeTo = "./styles/utilities.css", readFrom = "./" } = readConfigFile()
-let rawClasses: string[] = []
 
 // 1 Get File paths
 const filePaths = getFilePaths(readFrom);
-filePaths.forEach((path) => {
-  
+const rawClasses: string[] = filePaths.reduce((acc: string[], path) => {
   // 1.1 Parse .tsx into AST
-  const ast = generateAST(path)
+  const ast = generateAST(path);
   
   // 1.2 Get all className attributes from AST
-  rawClasses = [...extractClasses({ast}), ...rawClasses]
-})
+  const classes = getClassNames({ast});
+  
+  if (classes) {
+    acc.push(...classes.split(" "));
+  }
+  
+  return acc;
+}, []);
 
 // 2 Filter utility classes, ex. "flex d-f ml-20" => "d-f ml-20"
 const classes = filterClasses(rawClasses)
