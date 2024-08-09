@@ -82,7 +82,7 @@ const filterClasses = (classes: string[]): utilityClass[] => {
     let utilityClasses: utilityClass[] = [];
   
     /** @example ["m-1.6:hover", "m", "1.6"] */
-    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.%]+)(?::[a-zA-Z]+)?$/
+    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.%]+)(?:-([a-zA-Z]+))?$/
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg: RegExp = /^(\w+)--([\w-]+)$/
 
@@ -110,7 +110,8 @@ const filterClasses = (classes: string[]): utilityClass[] => {
             })
           }
         } else if (matchClass) {
-        const [ classKey, classValue ] =  [matchClass[1], matchClass[2]]
+          console.log(matchClass)
+        const [ classKey, classValue, classSelector ] =  [matchClass[1], matchClass[2], matchClass[3]]
         
         // Unit extension if applicable, "px" - "px solid" - "%" - ""
         const unitFromFullKey = Object.values(shortKeys).find(k=>k.name === classKey)?.valueExtension
@@ -130,7 +131,7 @@ const filterClasses = (classes: string[]): utilityClass[] => {
         if (!isDuplicate && (keyCheck && valueCheck)) {
             // Generate Valid utilityClass
             utilityClasses.push({
-            fullClass: singleClass,
+            fullClass: classSelector?`${singleClass}:${classSelector}`:`${singleClass}`,
             classKey: shortKeys[classKey]?.name || classKey,
             classValue: `${valueIsNum?(`${classValue}${extension}`):(shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
             })
