@@ -110,7 +110,6 @@ const filterClasses = (classes: string[]): utilityClass[] => {
             })
           }
         } else if (matchClass) {
-          console.log(matchClass)
         const [ classKey, classValue, classSelector ] =  [matchClass[1], matchClass[2], matchClass[3]]
         
         // Unit extension if applicable, "px" - "px solid" - "%" - ""

@@ -1,18 +1,13 @@
 #!/usr/bin/env ts-node
 "use strict";
-var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 const helpers_1 = require("./helpers");
-/** Welcome: Current Version */
-(0, helpers_1.watchWelcome)();
+/** run utils welcome - current version */
 /** Directories. Write: generated css utils. Read: classNames to interpret */
-const directory = {
-    writeTo: ((_a = (0, helpers_1.readConfigFile)()) === null || _a === void 0 ? void 0 : _a.writeTo) || "./styles/utilities.css",
-    readFrom: ((_b = (0, helpers_1.readConfigFile)()) === null || _b === void 0 ? void 0 : _b.readFrom) || "./"
-};
+const { writeTo = "./styles/utilities.css", readFrom = "./" } = (0, helpers_1.readConfigFile)();
 let rawClasses = [];
 // 1 Get File paths
-const filePaths = (0, helpers_1.getFilePaths)(directory.readFrom);
+const filePaths = (0, helpers_1.getFilePaths)(readFrom);
 filePaths.forEach((path) => {
     // 1.1 Parse .tsx into AST
     const ast = (0, helpers_1.generateAST)(path);
@@ -22,5 +17,5 @@ filePaths.forEach((path) => {
 // 2 Filter utility classes, ex. "flex d-f ml-20" => "d-f ml-20"
 const classes = (0, helpers_1.filterClasses)(rawClasses);
 // 3 Translate to CSS & writeTo path
-(0, helpers_1.writeCSS)({ classes, filePath: directory.writeTo });
+(0, helpers_1.writeCSS)({ classes, filePath: writeTo });
 //# sourceMappingURL=generator.js.map

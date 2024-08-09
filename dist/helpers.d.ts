@@ -4,11 +4,8 @@ interface utilityClass {
     classKey: string;
     classValue: string;
 }
-/**
- * Log Version at console
- * npm run utils
- */
-declare const watchWelcome: () => void;
+/** Get the package version from package.json */
+declare const packageVersion: () => any;
 /** Classes from attributes node
  *
  * @returns {string[]} - Array of classes
@@ -59,6 +56,7 @@ interface Config {
         };
     };
     extendValues?: Record<string, string>;
+    /** Must include filename, ex. ./src/styles/utilities.css */
     writeTo?: string;
     readFrom?: string;
     extensions?: string[];
@@ -66,5 +64,5 @@ interface Config {
 }
 declare function readConfigFile(): Config;
 export type { utilityClass };
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, watchWelcome };
+export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, packageVersion };
 //# sourceMappingURL=helpers.d.ts.map

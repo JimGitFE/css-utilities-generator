@@ -26,22 +26,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.watchWelcome = exports.writeCSS = exports.filterClasses = exports.extractClasses = exports.generateAST = exports.getFilePaths = exports.ProcessRetriever = void 0;
+exports.packageVersion = exports.writeCSS = exports.filterClasses = exports.extractClasses = exports.generateAST = exports.getFilePaths = exports.ProcessRetriever = void 0;
 exports.readConfigFile = readConfigFile;
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
 const parser = __importStar(require("@babel/parser"));
 const traverse_1 = __importDefault(require("@babel/traverse"));
 const dictionary_1 = require("./dictionary");
-/**
- * Log Version at console
- * npm run utils
- */
-const watchWelcome = () => {
-    const { version } = JSON.parse(fs_1.default.readFileSync(path_1.default.resolve(__dirname, '../package.json'), 'utf8'));
-    console.log(`\nUtility CSS Generator v${version}\n`);
+/** Get the package version from package.json */
+const packageVersion = () => {
+    return JSON.parse(fs_1.default.readFileSync(path_1.default.resolve(__dirname, '../package.json'), 'utf8')).version;
 };
-exports.watchWelcome = watchWelcome;
+exports.packageVersion = packageVersion;
 /** Classes from attributes node
  *
  * @returns {string[]} - Array of classes
@@ -100,7 +96,7 @@ const filterClasses = (classes) => {
     const { onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true } = readConfigFile();
     let utilityClasses = [];
     /** @example ["m-1.6:hover", "m", "1.6"] */
-    const utilClassReg = /^([a-zA-Z]+)-(\w+|[0-9.%]+)(?::[a-zA-Z]+)?$/;
+    const utilClassReg = /^([a-zA-Z]+)-(\w+|[0-9.%]+)(?:-([a-zA-Z]+))?$/;
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg = /^(\w+)--([\w-]+)$/;
     // Remove duplicate & non dictionary classes
@@ -125,7 +121,8 @@ const filterClasses = (classes) => {
             }
         }
         else if (matchClass) {
-            const [classKey, classValue] = [matchClass[1], matchClass[2]];
+            console.log(matchClass);
+            const [classKey, classValue, classSelector] = [matchClass[1], matchClass[2], matchClass[3]];
             // Unit extension if applicable, "px" - "px solid" - "%" - ""
             const unitFromFullKey = (_b = Object.values(dictionary_1.shortKeys).find(k => k.name === classKey)) === null || _b === void 0 ? void 0 : _b.valueExtension;
             const extension = unitFromFullKey || ((_c = dictionary_1.shortKeys[classKey]) === null || _c === void 0 ? void 0 : _c.valueExtension) || "";
@@ -139,7 +136,7 @@ const filterClasses = (classes) => {
             if (!isDuplicate && (keyCheck && valueCheck)) {
                 // Generate Valid utilityClass
                 utilityClasses.push({
-                    fullClass: singleClass,
+                    fullClass: classSelector ? `${singleClass}:${classSelector}` : `${singleClass}`,
                     classKey: ((_d = dictionary_1.shortKeys[classKey]) === null || _d === void 0 ? void 0 : _d.name) || classKey,
                     classValue: `${valueIsNum ? (`${classValue}${extension}`) : (dictionary_1.shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
                 });
