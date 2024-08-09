@@ -222,8 +222,10 @@ interface Config {
   units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
   extendKeys?: {[key:string]:{name: string, valueExtension: string}};
   extendValues?: Record<string, string>;
+  /** Must include filename, ex. ./src/styles/utilities.css */
   writeTo?: string;
   readFrom?: string;
+  // Files to be interpreted, have this extensions
   extensions?: string[];
   exclude?: string[];
 }
