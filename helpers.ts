@@ -76,10 +76,10 @@ const filterClasses = (classes: string[]): utilityClass[] => {
     const {onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
+    /** @example ["m-1.6:hover", "m", "1.6"] */
+    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.%]+)(?::[a-zA-Z]+)?$/
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg: RegExp = /^(\w+)--([\w-]+)$/
-    /** @example ["m-1.6", "m", "1.6"] */
-    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.%]+)$/
 
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
@@ -183,6 +183,7 @@ function readDir(dir: string, exclude: string[] = []): any {
 
 const getFilePaths = (dir: string): string[] => {
     const {extensions = ["tsx", "ts", "js", "jsx"], exclude = ["node_modules", ".git"]} = readConfigFile()
+    
     let files: string[] = [];
     for (const file of readDir(dir, exclude)) {
       if (extensions.some(ext => file.endsWith(ext))) {
