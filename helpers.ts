@@ -76,7 +76,6 @@ function inDictionary(dictionary: Record<string, any>, shortKey: string): boolea
  * ```
  */
 const filterClasses = (classes: string[]): utilityClass[] => {
-    console.log("received", classes)
     const {onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
