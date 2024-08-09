@@ -11,13 +11,13 @@ declare const packageVersion: () => any;
  * @returns {string[]} - Array of classes
  * @example
  * ```ts
- * const class = extractClasses();
+ * const class = getClassNames();
  * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
-declare const extractClasses: ({ ast }: {
+declare const getClassNames: ({ ast }: {
     ast: parser.ParseResult<File> | any;
-}) => string[];
+}) => string;
 /** Classes filter duplicates & utilities dictionary matches
  * @returns {string[]} - Dictionary matched classes
  * @example
@@ -64,5 +64,5 @@ interface Config {
 }
 declare function readConfigFile(): Config;
 export type { utilityClass };
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile, packageVersion };
+export { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion };
 //# sourceMappingURL=helpers.d.ts.map
