@@ -128,6 +128,8 @@ const dictionary: Abreviations  = {
     /** Color */
     c: {name: 'color', valueExtension: ''},
 
+    cu: {name: 'cursor', valueExtension: ''},
+
     }
 }
 
