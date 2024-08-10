@@ -9,7 +9,8 @@
     "test": "npm run build && jest",
     "ts-test": "ts-node tests/playground.ts",
     "git-test": "jest",
-    "rm-config": "rimraf -rf ./cuconfig.json"
+    "rm-config": "rimraf -rf ./cuconfig.json",
+    "utils": "nodemon"
   },
   "bin": {
     "gen-utils": "./generator.ts"

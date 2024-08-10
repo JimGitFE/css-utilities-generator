@@ -33,5 +33,6 @@ const nodemonJson = {
     "ext": "tsx,ts,js,jsx", 
     "exec": "node node_modules/css-utilities-generator/dist/generator.js",
     "ignore": ["node_modules/**/*", ".*/**/*"]
-  }
+}
 fs.writeFileSync(path.resolve(process.cwd(), 'nodemon.json'), JSON.stringify(nodemonJson, null, 2), 'utf8');
+console.log('Generated nodemon.json');
