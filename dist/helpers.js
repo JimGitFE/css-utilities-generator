@@ -91,7 +91,6 @@ function inDictionary(dictionary, shortKey) {
  * ```
  */
 const filterClasses = (classes) => {
-    console.log("received", classes);
     const { onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true } = readConfigFile();
     let utilityClasses = [];
     /** @example ["m-1.6:hover", "m", "1.6"] */

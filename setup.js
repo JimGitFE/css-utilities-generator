@@ -27,7 +27,7 @@ function addScriptToPackageJson(scriptName, scriptCommand) {
 // 1 Add script to package.json
 addScriptToPackageJson("utils", "nodemon");
 
-// 2 Add nodemon.json
+// 2 Generate nodemon.json
 const nodemonJson = {
     "watch": ["./"], 
     "ext": "tsx,ts,js,jsx", 

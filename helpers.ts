@@ -146,7 +146,6 @@ const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: strin
     classes.forEach(({ fullClass, classKey, classValue }) => {
       utilitiesCSS += `.${fullClass} { ${classKey}: ${classValue}; }\n`;
     });
-
     // Create the directory if it doesn't exist
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) {
