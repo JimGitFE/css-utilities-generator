@@ -107,6 +107,7 @@ const dictionary = {
         pos: { name: 'position', valueExtension: '' },
         /** Color */
         c: { name: 'color', valueExtension: '' },
+        cu: { name: 'cursor', valueExtension: '' },
     }
 };
 const [shortKeys, shortValues] = [Object.assign(Object.assign({}, dictionary.shortKeys), extendKeys), Object.assign(Object.assign({}, dictionary.shortValues), extendValues)];

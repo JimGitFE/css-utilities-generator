@@ -1,18 +1,6 @@
 # 🎨 css-utilities-generator [![NPM](https://img.shields.io/npm/v/css-utilities-generator.svg)](https://www.npmjs.com/package/css-utilities-generator)
 
-```html
-<div className="d-f jc-sb mxw-1050">
-  <button>Log In</button>
-  <p>Description</p>
-</div>
-```
-> some-file.tsx
-```css
-.d-f { display: flex; }
-.jc-sb { justify-content: space-between; }
-.mxw-1050 { max-width: 1050px; }
-```
-> utilities.css
+![Preview](./preview.gif)
 
 TypeScript utility package that generates a utilities.css file on demand with shorthand class names for common CSS properties. By using intuitive notations like d-f (display: flex) as values for className attributes inside your jsx, this package streamlines your styling process, making your main CSS structure cleaner, reusable and more maintainable while ensuring consistent, efficient application of styles across your project.
 
@@ -36,7 +24,62 @@ Run the following command to start the watcher:
 ```
 Now, you can start watching for changes in your src directory and automatically regenerate the CSS utilities. 
 
-## Configuration file (Defaults)
+## Example
+```html
+  <main className="ml-50 mr-50">
+    <header className="d-f h-64px ai-c jc-sb pos-sticky top-0 z-5">
+      <h1 className="w-fc">
+        Site Title
+      </h1>
+      <nav className="w-300px">
+        <ul className="d-f jc-sb">
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section className="d-f fd-co ai-c jc-c h-80">
+      <h1 className="fs-40 fw-700">
+        Welcome!
+      </h1>
+      <p className="mt-2rem fs-12 o-70 fw-2">
+        Some filler text
+      </p>
+    </section>
+  </main>
+```
+> some-file.tsx
+```css
+.ml-50 { margin-left: 50px; }
+.mr-50 { margin-right: 50px; }
+.d-f { display: flex; }
+.h-64px { height: 64px; }
+.ai-c { align-items: center; }
+.jc-sb { justify-content: space-between; }
+.pos-sticky { position: sticky; }
+.z-5 { z-index: 5; }
+.w-fc { width: fit-content; }
+.w-300px { width: 300px; }
+.fd-co { flex-direction: column; }
+.jc-c { justify-content: center; }
+.h-80 { height: 80%; }
+.fs-40 { font-size: 40px; }
+.fw-700 { font-weight: 700; }
+.mt-2rem { margin-top: 2rem; }
+.fs-12 { font-size: 12px; }
+.o-70 { opacity: 70%; }
+.fw-2 { font-weight: 2; }
+```
+> utilities.css
+
+## Configuration File (Defaults)
 ```javascript
 {
     "onlyDictionary": true, /* Matching only dictionary or extension properties, Defaults to false */

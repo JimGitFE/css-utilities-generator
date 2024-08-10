@@ -4,18 +4,20 @@ interface utilityClass {
     classKey: string;
     classValue: string;
 }
+/** Get the package version from package.json */
+declare const packageVersion: () => any;
 /** Classes from attributes node
  *
  * @returns {string[]} - Array of classes
  * @example
  * ```ts
- * const class = extractClasses();
+ * const class = getClassNames();
  * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
-declare const extractClasses: ({ ast }: {
+declare const getClassNames: ({ ast }: {
     ast: parser.ParseResult<File> | any;
-}) => string[];
+}) => string;
 /** Classes filter duplicates & utilities dictionary matches
  * @returns {string[]} - Dictionary matched classes
  * @example
@@ -34,7 +36,7 @@ export declare class ProcessRetriever {
     constructor(process: NodeJS.Process);
     get(flagName: string): undefined;
 }
-declare const getFilePaths: (dir: string, extensions?: string[]) => string[];
+declare const getFilePaths: (dir: string) => string[];
 declare const generateAST: (filePath: string) => parser.ParseResult<File> | any;
 interface Config {
     /**
@@ -54,10 +56,13 @@ interface Config {
         };
     };
     extendValues?: Record<string, string>;
+    /** Must include filename, ex. ./src/styles/utilities.css */
     writeTo?: string;
     readFrom?: string;
+    extensions?: string[];
+    exclude?: string[];
 }
 declare function readConfigFile(): Config;
 export type { utilityClass };
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile };
+export { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion };
 //# sourceMappingURL=helpers.d.ts.map

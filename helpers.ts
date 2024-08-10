@@ -10,17 +10,21 @@ interface utilityClass {
     classValue: string // The full CSS property value, ex. [10, '10px']
 }
 
+/** Get the package version from package.json */
+const packageVersion = () => {
+  return JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')).version
+}
+
 /** Classes from attributes node 
  * 
  * @returns {string[]} - Array of classes
  * @example
  * ```ts
- * const class = extractClasses();
+ * const class = getClassNames();
  * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
-const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] => {
-    let classes: string[] = [];
+const getClassNames = ({ast}: {ast: parser.ParseResult<File> | any}): string => {
     let allClasses: string = '';
 
     // 1 Traverse the AST (Abstract Syntax Tree)
@@ -51,12 +55,11 @@ const extractClasses = ({ast}: {ast: parser.ParseResult<File> | any}): string[] 
             // 4 format into array of string classes
             allClasses += nodeClass() + " ";
             allClasses.slice(0, -1)
-            classes = allClasses.split(' ');
           }
         },
     });
-
-    return classes;
+    
+    return allClasses;
 }
   
 
@@ -72,14 +75,14 @@ function inDictionary(dictionary: Record<string, any>, shortKey: string): boolea
  * console.log(classes); // [{fullClass: 'm-10', classKey: 'margin', classValue: '10px'}, ...]
  * ```
  */
-const filterClasses = (classes: string[]): utilityClass[] => {  
+const filterClasses = (classes: string[]): utilityClass[] => {
     const {onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
+    /** @example ["m-1.6:hover", "m", "1.6"] */
+    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.%]+)(?:-([a-zA-Z]+))?$/
     /** @example ["h--spacing-4", "h", "spacing-4"] */
     const utilVarValReg: RegExp = /^(\w+)--([\w-]+)$/
-    /** @example ["m-1.6", "m", "1.6"] */
-    const utilClassReg:RegExp = /^([a-zA-Z]+)-(\w+|[0-9.%]+)$/
 
     // Remove duplicate & non dictionary classes
     classes.forEach(singleClass => {
@@ -105,7 +108,7 @@ const filterClasses = (classes: string[]): utilityClass[] => {
             })
           }
         } else if (matchClass) {
-        const [ classKey, classValue ] =  [matchClass[1], matchClass[2]]
+        const [ classKey, classValue, classSelector ] =  [matchClass[1], matchClass[2], matchClass[3]]
         
         // Unit extension if applicable, "px" - "px solid" - "%" - ""
         const unitFromFullKey = Object.values(shortKeys).find(k=>k.name === classKey)?.valueExtension
@@ -125,7 +128,7 @@ const filterClasses = (classes: string[]): utilityClass[] => {
         if (!isDuplicate && (keyCheck && valueCheck)) {
             // Generate Valid utilityClass
             utilityClasses.push({
-            fullClass: singleClass,
+            fullClass: classSelector?`${singleClass}:${classSelector}`:`${singleClass}`,
             classKey: shortKeys[classKey]?.name || classKey,
             classValue: `${valueIsNum?(`${classValue}${extension}`):(shortValues[classValue] || classValue)}` // if classKey not abbreviated, use value as is
             })
@@ -143,7 +146,6 @@ const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: strin
     classes.forEach(({ fullClass, classKey, classValue }) => {
       utilitiesCSS += `.${fullClass} { ${classKey}: ${classValue}; }\n`;
     });
-
     // Create the directory if it doesn't exist
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) {
@@ -183,6 +185,7 @@ function readDir(dir: string, exclude: string[] = []): any {
 
 const getFilePaths = (dir: string): string[] => {
     const {extensions = ["tsx", "ts", "js", "jsx"], exclude = ["node_modules", ".git"]} = readConfigFile()
+    
     let files: string[] = [];
     for (const file of readDir(dir, exclude)) {
       if (extensions.some(ext => file.endsWith(ext))) {
@@ -216,8 +219,10 @@ interface Config {
   units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
   extendKeys?: {[key:string]:{name: string, valueExtension: string}};
   extendValues?: Record<string, string>;
+  /** Must include filename, ex. ./src/styles/utilities.css */
   writeTo?: string;
   readFrom?: string;
+  // Files to be interpreted, have this extensions
   extensions?: string[];
   exclude?: string[];
 }
@@ -234,4 +239,4 @@ function readConfigFile(): Config {
 }
 
 export type { utilityClass }
-export { getFilePaths, generateAST, extractClasses, filterClasses, writeCSS, readConfigFile }
+export { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion }
