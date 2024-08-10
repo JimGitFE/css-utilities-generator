@@ -1,12 +1,3 @@
-
-// ### 2. **Automated Script Setup (Optional)**
-
-// If you want to provide a more automated setup, you can write a script that modifies the user's `package.json`. This is a bit more advanced and requires handling user permissions and existing content in the `package.json` file.
-
-// Here’s a basic example of how you might achieve this with a Node.js script:
-
-// **Create a `setup.js` Script:**
-
 const fs = require('fs');
 const path = require('path');
 
@@ -33,7 +24,14 @@ function addScriptToPackageJson(scriptName, scriptCommand) {
     console.log(`Script "${scriptName}" added to package.json.`);
 }
 
-const scriptName = 'utils';
-const scriptCommand = 'nodemon --watch ./ --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utilities-generator/dist/generator.js';
+// 1 Add script to package.json
+addScriptToPackageJson("utils", "nodemon");
 
-addScriptToPackageJson(scriptName, scriptCommand);
+// 2 Add nodemon.json
+const nodemonJson = {
+    "watch": ["./"], 
+    "ext": "tsx,ts,js,jsx", 
+    "exec": "node node_modules/css-utilities-generator/dist/generator.js",
+    "ignore": ["node_modules/**/*", ".*/**/*"]
+  }
+fs.writeFileSync(path.resolve(process.cwd(), 'nodemon.json'), JSON.stringify(nodemonJson, null, 2), 'utf8');
