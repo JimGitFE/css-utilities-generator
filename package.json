@@ -5,7 +5,7 @@
   "main": "dist/generator.js",
   "types": "dist/generator.d.ts",
   "scripts": {
-    "postinstall": "npm install -g nodemon && node node_modules/css-utilities-generator/setup.js",
+    "postinstall": "npm install -g nodemon && node setup.js",
     "build": "rimraf -rf ./dist/ && tsc",
     "test": "npm run build && jest",
     "ts-test": "ts-node tests/playground.ts",
