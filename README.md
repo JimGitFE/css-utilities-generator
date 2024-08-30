@@ -9,6 +9,7 @@ First, install the css-utilities-generator package and its dependencies in your 
 ```bash
 # 1 npm
 > npm i -D css-utilities-generator@latest
+> npm i nodemon
 ```
 The package includes a setup script that will add a necessary configuration to your package.json.
 ```bash
