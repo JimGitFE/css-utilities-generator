@@ -5,7 +5,7 @@
 TypeScript utility package that generates a utilities.css file on demand with shorthand class names for common CSS properties. By using intuitive notations like d-f (display: flex) as values for className attributes inside your jsx, this package streamlines your styling process, making your main CSS structure cleaner, reusable and more maintainable while ensuring consistent, efficient application of styles across your project.
 
 ## Installation & Setup (Auto)
-First, install the css-utilities-generator package, dependencies and configuration files into your project:
+First, run create-css-utilities auto executable, installing css-utilities-generator, dependencies and configuration files into your project:
 ```bash
 # Automatic installation executable:
 > npx create-css-utilities
