@@ -5,25 +5,18 @@
 TypeScript utility package that generates a utilities.css file on demand with shorthand class names for common CSS properties. By using intuitive notations like d-f (display: flex) as values for className attributes inside your jsx, this package streamlines your styling process, making your main CSS structure cleaner, reusable and more maintainable while ensuring consistent, efficient application of styles across your project.
 
 ## Installation & Setup (Auto)
-First, install the css-utilities-generator package and its dependencies in your project:
+First, install the css-utilities-generator package, dependencies and configuration files into your project:
 ```bash
-# 1 npm
-> npm i -D css-utilities-generator@latest
-> npm i nodemon
+# Automatic installation executable:
+> npx create-css-utilities
 ```
-The package includes a setup script that will add a necessary configuration to your package.json.
-```bash
-# 2 Run the following script to add the command to your project:
-> node node_modules/css-utilities-generator/setup.js
-```
-Script adds a new npm script to your package.json file called "utils" with the following value, "nodemon --watch src --ext tsx,ts,js,jsx --exec ts-node node_modules/css-utilities-generator/generator.ts", to handle watching for file changes.
 
-Run the following command to start the watcher:
+Run the following command to start generatic css utilities:
 ```bash
-# 3 Run the following command (generates css utilities on save):
+# Run the following command (generates css utilities on save):
 > npm run utils
 ```
-Now, you can start watching for changes in your src directory and automatically regenerate the CSS utilities. 
+Now import the generated css file to the project root file, start watching for changes in your root directory and automatically regenerate the CSS utilities. 
 
 ## Example
 ```html
