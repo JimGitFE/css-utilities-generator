@@ -5,7 +5,6 @@ exports.executeFile = exports.ProcessRetriever = void 0;
 class ProcessRetriever {
     constructor(process, commandsMap) {
         this.args = process.argv.slice(2);
-        console.log(process.argv);
         this.commandsMap = commandsMap;
     }
     /** Main Command */

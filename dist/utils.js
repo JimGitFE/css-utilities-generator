@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -23,22 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDirectories = void 0;
 const path = __importStar(require("path"));
-const utils_1 = require("./utils");
-const commandList_1 = __importDefault(require("./commandList"));
-const utils_2 = require("../utils");
-const cli = new utils_1.ProcessRetriever(process, commandList_1.default);
-/** Main */
-const commandInstance = commandList_1.default[cli.command()];
-console.log((0, utils_2.getDirectories)().package, (0, utils_2.getDirectories)().user);
-if (commandInstance.action[0]) {
-    (0, utils_1.executeFile)(path.join((0, utils_2.getDirectories)().package, commandInstance.action[1]));
-}
-else {
-    console.log(commandInstance.action[1]);
-}
-//# sourceMappingURL=index.js.map
+/** Paths */
+const getDirectories = () => {
+    return {
+        package: path.resolve(__dirname, '..'),
+        user: path.resolve(process.cwd())
+    };
+};
+exports.getDirectories = getDirectories;
+//# sourceMappingURL=utils.js.map

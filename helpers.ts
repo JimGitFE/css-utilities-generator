@@ -3,6 +3,7 @@ import fs from 'fs';
 import * as parser from '@babel/parser';
 import traverse from "@babel/traverse";
 import { shortKeys, shortValues } from './dictionary';
+import { getDirectories } from './utils';
 
 interface utilityClass {
     fullClass: string, // The raw input class name, ex. 'm-10'
@@ -12,7 +13,7 @@ interface utilityClass {
 
 /** Get the package version from package.json */
 const packageVersion = () => {
-  return JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')).version
+  return JSON.parse(fs.readFileSync(path.resolve(getDirectories().package, 'package.json'), 'utf8')).version
 }
 
 /** Classes from attributes node 

@@ -33,9 +33,10 @@ const fs_1 = __importDefault(require("fs"));
 const parser = __importStar(require("@babel/parser"));
 const traverse_1 = __importDefault(require("@babel/traverse"));
 const dictionary_1 = require("./dictionary");
+const utils_1 = require("./utils");
 /** Get the package version from package.json */
 const packageVersion = () => {
-    return JSON.parse(fs_1.default.readFileSync(path_1.default.resolve(__dirname, '../package.json'), 'utf8')).version;
+    return JSON.parse(fs_1.default.readFileSync(path_1.default.resolve((0, utils_1.getDirectories)().package, 'package.json'), 'utf8')).version;
 };
 exports.packageVersion = packageVersion;
 /** Classes from attributes node

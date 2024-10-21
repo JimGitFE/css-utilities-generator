@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const { getDirectories } = require('./utils');
 
-const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+const packageJsonPath = path.resolve(getDirectories().user, 'package.json');
 
 function addScriptToPackageJson(scriptName, scriptCommand) {
     if (!fs.existsSync(packageJsonPath)) {
@@ -34,5 +35,5 @@ const nodemonJson = {
     "exec": "node node_modules/css-utilities-generator/dist/generator.js",
     "ignore": ["node_modules/**/*", ".*/**/*"]
 }
-fs.writeFileSync(path.resolve(process.cwd(), 'nodemon.json'), JSON.stringify(nodemonJson, null, 2), 'utf8');
+fs.writeFileSync(path.resolve(getDirectories().user, 'nodemon.json'), JSON.stringify(nodemonJson, null, 2), 'utf8');
 console.log('Generated nodemon.json');
