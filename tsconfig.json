@@ -31,6 +31,6 @@
     "lib": ["es2016", "dom"], // array.includes wasnt supported
     "types": [ "node" ],
   },
-  "include": ["./**/*"],
+  "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist"],
 }
