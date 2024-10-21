@@ -96,6 +96,13 @@ const dictionary: Abreviations  = {
     // fl: {name: 'flex', type: ''},
     // fw: {name: 'flex-wrap', type: ''},
     z: {name: 'z-index', valueExtension: ''},
+    gap: { name: "gap", valueExtension: "px" },
+
+    /** Background */
+    bg: { name: "background", valueExtension: "" },
+    bgc: { name: "background-color", valueExtension: "" },
+    bgi: { name: "background-image", valueExtension: "" },
+    bgp: { name: "background-position", valueExtension: "" },
 
     /* Grid */
     gtc: {name: 'grid-template-columns', valueExtension: ''},
@@ -123,12 +130,18 @@ const dictionary: Abreviations  = {
     ov: {name: 'overflow', valueExtension: ''},
 
     /** Position */
+    top: { name: "top", valueExtension: "" },
+    left: { name: "left", valueExtension: "" },
+    right: { name: "right", valueExtension: "" },
+    bottom: { name: "bottom", valueExtension: "" },
     pos: {name: 'position', valueExtension: ''},
-
+    
     /** Color */
     c: {name: 'color', valueExtension: ''},
-
+    
+    /** MISC */
     cu: {name: 'cursor', valueExtension: ''},
+    pe: { name: "pointer-events", valueExtension: "" },
 
     }
 }
