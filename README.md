@@ -18,36 +18,35 @@ Run the following command to start generatic css utilities:
 ```
 Now import the generated css file to the project root file, start watching for changes in your root directory and automatically regenerate the CSS utilities. 
 
+## Dictionary
+| Property                | Class      | CSS Output                       | ___ | Property                | Class      | CSS Output                       |
+|-------------------------|------------|----------------------------------|----|-------------------------|------------|----------------------------------|
+| display                 | .d-f      | { display: flex }                | ___ | justify-content          | .jc-c      | { justify-content: center }      |
+|                         | .d-n      | { display: none }                | ___ |                          | .jc-sb     | { justify-content: space-between }|
+|                         | .d-b      | { display: block }               | ___ |                          | .jc-sa     | { justify-content: space-around } |
+|                         | .d-g      | { display: grid }                | ___ |                          | .jc-fe     | { justify-content: flex-end }    |
+| flex-direction          | .fd-r    | { flex-direction: row }          | ___ | align-items             | .ai-c    | { align-items: center }          |
+|                         | .fd-c    | { flex-direction: column }       | ___ |                         | .ai-s    | { align-items: start }           |
+|                         | .fd-rr   | { flex-direction: row-reverse }  | ___ |                         | .ai-e    | { align-items: end }             |
+|                         | .fd-cr   | { flex-direction: column-reverse }| ___ |                         | .ai-ba    | { align-items: baseline }        |
+|                         | .fd-d    | { flex-direction: inherit }      | ___ | align-content           | .ac-s    | { align-content: start }         |
+|                         | .fd-n    | { flex-direction: none }         | ___ |                         | .ac-e    | { align-content: end }           |
+|                         | .fd-r    | { flex-direction: row }          | ___ |                         | .ac-c    | { align-content: center }        |
+|                         | .fd-c    | { flex-direction: column }       | ___ |                         | .ac-ba    | { align-content: baseline }      |
+| grid-template-columns    | .gtc-2  | { grid-template-columns: 2 } | ___ | gap                     | .gap      | { gap: value }                  |
+|                         | .gtc-3  | { grid-template-columns: 3 } | ___ | gap                     | .gap-40      | { gap: 40px }                  |
+|                         | .gtc-4  | { grid-template-columns: 4 } | ___ | gap                     | .gap-20vw      | { gap: 20vw }                  |
+|                         | .gtc-5  | { grid-template-columns: 5 } | ___ | gap                     | .gap-80      | { gap: 80px }                  |
+| margin                  | .m        | { margin: value }                | ___ | padding                 | .p        | { padding: value }              |
+|                         | .ml-40       | { margin-left: 40px }           | ___ | padding-left            | .pl-40       | { padding-left: 40px }         |
+|                         | .mr-20vw       | { margin-right: 20vw }          | ___ | padding-right           | .pr-20vw       | { padding-right: 20vw }        |
+|                         | .mt-80       | { margin-top: 80px }            | ___ | padding-top             | .pt-80       | { padding-top: 80px }          |
+|                         | .mb       | { margin-bottom: value }         | ___ | padding-bottom          | .pb       | { padding-bottom: value }       |
+
 ## Example
 ```html
   <main className="ml-50 mr-50">
     <header className="d-f h-64px ai-c jc-sb pos-sticky top-0 z-5">
-      <h1 className="w-fc">
-        Site Title
-      </h1>
-      <nav className="w-300px">
-        <ul className="d-f jc-sb">
-          <li>
-            <a href="#">Home</a>
-          </li>
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <section className="d-f fd-co ai-c jc-c h-80">
-      <h1 className="fs-40 fw-700">
-        Welcome!
-      </h1>
-      <p className="mt-2rem fs-12 o-70 fw-2">
-        Some filler text
-      </p>
-    </section>
-  </main>
 ```
 > some-file.tsx
 ```css
@@ -59,17 +58,6 @@ Now import the generated css file to the project root file, start watching for c
 .jc-sb { justify-content: space-between; }
 .pos-sticky { position: sticky; }
 .z-5 { z-index: 5; }
-.w-fc { width: fit-content; }
-.w-300px { width: 300px; }
-.fd-co { flex-direction: column; }
-.jc-c { justify-content: center; }
-.h-80 { height: 80%; }
-.fs-40 { font-size: 40px; }
-.fw-700 { font-weight: 700; }
-.mt-2rem { margin-top: 2rem; }
-.fs-12 { font-size: 12px; }
-.o-70 { opacity: 70%; }
-.fw-2 { font-weight: 2; }
 ```
 > utilities.css
 

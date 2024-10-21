@@ -17,6 +17,8 @@ const dictionary: Abreviations  = {
         
         /** display, ex. flex */
         f: 'flex',
+        b: 'block',
+        g: 'grid',
 
         /** flex-direction, ex.  column */
         co: 'column',
@@ -26,6 +28,9 @@ const dictionary: Abreviations  = {
         
         /** justify-content, ex. Center */
         c: 'center',
+        s: 'start',
+        e: 'end',
+        ba: 'baseline',
         fs: 'flex-start',
         fe: 'flex-end',
         sb: 'space-between',
@@ -40,7 +45,7 @@ const dictionary: Abreviations  = {
         /** Other */
         h: 'hidden',
         v: 'visible',
-        s: 'scroll',
+        sc: 'scroll',
         // n: 'none',
         // a: 'auto',
 
@@ -96,7 +101,7 @@ const dictionary: Abreviations  = {
     // fl: {name: 'flex', type: ''},
     // fw: {name: 'flex-wrap', type: ''},
     z: {name: 'z-index', valueExtension: ''},
-    gap: { name: "gap", valueExtension: "px" },
+    gap: { name: "gap", valueExtension: units },
 
     /** Background */
     bg: { name: "background", valueExtension: "" },
