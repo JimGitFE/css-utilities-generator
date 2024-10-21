@@ -156,24 +156,6 @@ const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: strin
     fs.writeFileSync(filePath, utilitiesCSS);
 }
 
-export class ProcessRetriever {
-    private args: string[];
-
-    constructor(process: NodeJS.Process) {
-        this.args = process.argv.slice(2);
-    }
-
-    get(flagName: string) {
-        let flagValue;
-        this.args.forEach((arg, index) => {
-            if (arg === `--${flagName}`) {
-                flagValue = this.args[index + 1];
-            }
-        });
-        return flagValue;
-    }
-}
-
 function readDir(dir: string, exclude: string[] = []): any {
   return fs.readdirSync(dir, { withFileTypes: true })
     .filter((dirent: fs.Dirent) => !exclude.includes(dirent.name))

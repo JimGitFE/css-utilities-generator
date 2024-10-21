@@ -36,4 +36,4 @@ function deleteConfigFile() {
         console.log('File does not exist');
     }
 }
-//# sourceMappingURL=util.js.map
+//# sourceMappingURL=utils.js.map

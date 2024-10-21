@@ -31,11 +31,6 @@ declare const writeCSS: ({ classes, filePath }: {
     classes: utilityClass[];
     filePath: string;
 }) => void;
-export declare class ProcessRetriever {
-    private args;
-    constructor(process: NodeJS.Process);
-    get(flagName: string): undefined;
-}
 declare const getFilePaths: (dir: string) => string[];
 declare const generateAST: (filePath: string) => parser.ParseResult<File> | any;
 interface Config {

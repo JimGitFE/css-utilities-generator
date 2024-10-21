@@ -1,5 +1,5 @@
 const { filterClasses } = require('../dist/helpers.js');
-const { createConfigFile, deleteConfigFile } = require('../dist/tests/util.js');
+const { createConfigFile, deleteConfigFile } = require('../dist/tests/utils.js');
 
 // onlyDictionary Config
 

@@ -12,9 +12,7 @@
     "git-test": "jest",
     "rm-config": "rimraf -rf ./cuconfig.json"
   },
-  "bin": {
-    "gen-utils": "./generator.ts"
-  },
+  "bin": "./dist/cli/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JimGitFE/css-utilities-generator.git"

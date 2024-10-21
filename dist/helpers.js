@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.packageVersion = exports.writeCSS = exports.filterClasses = exports.getClassNames = exports.generateAST = exports.getFilePaths = exports.ProcessRetriever = void 0;
+exports.packageVersion = exports.writeCSS = exports.filterClasses = exports.getClassNames = exports.generateAST = exports.getFilePaths = void 0;
 exports.readConfigFile = readConfigFile;
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
@@ -158,21 +158,6 @@ const writeCSS = ({ classes, filePath }) => {
     fs_1.default.writeFileSync(filePath, utilitiesCSS);
 };
 exports.writeCSS = writeCSS;
-class ProcessRetriever {
-    constructor(process) {
-        this.args = process.argv.slice(2);
-    }
-    get(flagName) {
-        let flagValue;
-        this.args.forEach((arg, index) => {
-            if (arg === `--${flagName}`) {
-                flagValue = this.args[index + 1];
-            }
-        });
-        return flagValue;
-    }
-}
-exports.ProcessRetriever = ProcessRetriever;
 function readDir(dir, exclude = []) {
     return fs_1.default.readdirSync(dir, { withFileTypes: true })
         .filter((dirent) => !exclude.includes(dirent.name))
