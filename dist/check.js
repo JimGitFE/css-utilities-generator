@@ -53,10 +53,10 @@ classes.forEach(({ fullClass, classKey, classValue }) => {
 const currentCSS = fs.readFileSync(writeTo, 'utf-8').trim();
 if (currentCSS.replace(/\s+/g, '') === generatedCSS.replace(/\s+/g, '')) {
     console.log('Generated css utilities are up to date.');
-    process.exit(0); // Success
+    process.exit(0);
 }
 else {
     console.error('Generated css utilities are outdated.');
-    process.exit(1); // Failure
+    process.exit(1);
 }
 //# sourceMappingURL=check.js.map
