@@ -1,2 +1,3 @@
-/** Generate utils and compare with current */ 
+#!/usr/bin/env node
+export {};
 //# sourceMappingURL=check.d.ts.map

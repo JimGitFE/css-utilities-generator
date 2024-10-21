@@ -28,7 +28,7 @@ const path = __importStar(require("path"));
 /** Paths */
 const getDirectories = () => {
     return {
-        package: path.resolve(process.cwd(), "node_modules/css-utilities-generator"),
+        package: path.resolve(process.cwd(), "node_modules/css-utilities-generator"), // dirname process [1] ..
         user: path.resolve(process.cwd())
     };
 };
