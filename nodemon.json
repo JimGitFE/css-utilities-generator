@@ -1,0 +1,11 @@
+{
+    "watch": [
+      "../../"
+    ],
+    "ext": "tsx,ts,js,jsx",
+    "exec": "css-utilities-generator generate",
+    "ignore": [
+      "../../node_modules/**/*",
+      "../../.*/**/*"
+    ]
+  }

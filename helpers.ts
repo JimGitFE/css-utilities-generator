@@ -167,11 +167,11 @@ function readDir(dir: string, exclude: string[] = []): any {
 }
 
 const getFilePaths = (dir: string): string[] => {
-    const {extensions = ["tsx", "ts", "js", "jsx"], exclude = ["node_modules", ".git"]} = readConfigFile()
+    const {extensions = "tsx,ts,js,jsx", exclude = ["node_modules", ".git"]} = readConfigFile()
     
     let files: string[] = [];
     for (const file of readDir(dir, exclude)) {
-      if (extensions.some(ext => file.endsWith(ext))) {
+      if (extensions.split(",").some(ext => file.endsWith(ext))) {
           files.push(file.replace(/\\/g, '/'));
       }
     }
@@ -206,7 +206,7 @@ interface Config {
   writeTo?: string;
   readFrom?: string;
   // Files to be interpreted, have this extensions
-  extensions?: string[];
+  extensions?: string;
   exclude?: string[];
 }
 
