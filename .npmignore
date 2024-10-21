@@ -4,6 +4,7 @@
 
 # testing
 /tests
+/.github/
 
 # debug
 npm-debug.log*
