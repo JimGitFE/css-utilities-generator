@@ -1,4 +1,4 @@
-# 🎨 css-utilities-generator [![NPM](https://img.shields.io/npm/v/css-utilities-generator.svg)](https://www.npmjs.com/package/css-utilities-generator)
+# 🎨 css-utilities-generator [![NPM](https://img.shields.io/npm/v/css-utilities-generator.svg)](https://www.npmjs.com/package/css-utilities-generator) ![NPM](https://github.com/JimGitFE/css-utilities-generator/actions/workflows/integrate.yml/badge.svg)
 
 ![Preview](./preview.gif)
 
