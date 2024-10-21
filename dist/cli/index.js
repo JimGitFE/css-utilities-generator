@@ -34,7 +34,8 @@ const utils_2 = require("../utils");
 const cli = new utils_1.ProcessRetriever(process, commandList_1.default);
 /** Main */
 const commandInstance = commandList_1.default[cli.command()];
-console.log((0, utils_2.getDirectories)().package, (0, utils_2.getDirectories)().user);
+const packageRootDir = path.resolve((0, utils_2.getDirectories)().package, "node_modules/css-utilities-generator");
+console.log((0, utils_2.getDirectories)().package, (0, utils_2.getDirectories)().user, packageRootDir);
 if (commandInstance.action[0]) {
     (0, utils_1.executeFile)(path.join((0, utils_2.getDirectories)().package, commandInstance.action[1]));
 }

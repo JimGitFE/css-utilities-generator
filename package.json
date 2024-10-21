@@ -62,8 +62,5 @@
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
-  },
-  "dependencies": {
-    "file-auuto-exe": "^1.0.0"
   }
 }
