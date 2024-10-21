@@ -13,7 +13,7 @@ class ProcessRetriever {
         const fulls = Object.keys(this.commandsMap);
         const shorts = Object.values(this.commandsMap).map(c => c.short);
         if (shorts.includes(main)) {
-            return this.commandsMap[main].short;
+            return Object.entries(this.commandsMap).find(([key, value]) => value.short === main)[0];
         }
         else if (fulls.includes(main)) {
             return main;

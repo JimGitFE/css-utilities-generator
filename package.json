@@ -10,7 +10,8 @@
     "test": "npm run build && jest",
     "ts-test": "ts-node tests/playground.ts",
     "git-test": "jest",
-    "rm-config": "rimraf -rf ./cuconfig.json"
+    "rm-config": "rimraf -rf ./cuconfig.json",
+    "utils": "css-utilities-generator -g"
   },
   "bin": "./dist/cli/index.js",
   "repository": {
