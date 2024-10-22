@@ -4,7 +4,7 @@ import { addScriptToPackageJson, writeFileInRoot, askUser, isValidPath } from '.
 
 /** Default configuration */
 let cuconfig = {
-    acceptAnyVariable: true,
+    acceptAnyVariable: false,
     acceptAnyValue: true,
     readFrom: "./",
     writeTo: "./styles/utilities.css",

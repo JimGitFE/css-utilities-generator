@@ -77,7 +77,7 @@ function inDictionary(dictionary: Record<string, any>, shortKey: string): boolea
  * ```
  */
 const filterClasses = (classes: string[]): utilityClass[] => {
-    const {acceptAnyVariable: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
+    const {acceptAnyVariable = false, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
     /** @example ["m-1.6:hover", "m", "1.6"] */
@@ -98,7 +98,7 @@ const filterClasses = (classes: string[]): utilityClass[] => {
           const isDuplicate = utilityClasses.some((p) => p.fullClass === singleClass);
 
           // Key exist in dictionary
-          const valueCheck = (!notAcceptAny || acceptAnyKey) || (inDictionary(shortKeys, classKey))
+          const valueCheck = (acceptAnyVariable || acceptAnyKey) || (inDictionary(shortKeys, classKey))
           
           if (!isDuplicate && (valueCheck)) {
             // Generate Valid utilityClass
@@ -122,8 +122,8 @@ const filterClasses = (classes: string[]): utilityClass[] => {
         const valueIsNum = /^\d+$/.test(String(classValue))
         
         // Key & Value exist in dictionary || or use them as is
-        const keyCheck = (!notAcceptAny || acceptAnyKey) || inDictionary(shortKeys, classKey)
-        const valueCheck = (!notAcceptAny || acceptAnyValue) || (valueIsNum || inDictionary(shortValues, classValue))
+        const keyCheck = (acceptAnyVariable || acceptAnyKey) || inDictionary(shortKeys, classKey)
+        const valueCheck = (acceptAnyVariable || acceptAnyValue) || (valueIsNum || inDictionary(shortValues, classValue))
 
         
         if (!isDuplicate && (keyCheck && valueCheck)) {
