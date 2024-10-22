@@ -1,5 +1,5 @@
-const { filterClasses } = require('../helpers.js');
-const { createConfigFile, deleteConfigFile } = require('./utils.js');
+const { filterClasses } = require('../../dist/helpers.js');
+const { createConfigFile, deleteConfigFile } = require('../../dist/tests/utils.js');
 
 // acceptAnyVariable Config
 
