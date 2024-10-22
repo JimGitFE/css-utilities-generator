@@ -1,4 +1,4 @@
-const { filterClasses } = require('../dist/helpers.js');
+const { filterClasses } = require('../helpers.js');
 // Config: empty
 
 test('Numeric Values', () => {

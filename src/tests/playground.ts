@@ -1,4 +1,4 @@
-import { filterClasses } from "../src/helpers";
+import { filterClasses } from "../helpers";
 
 // console.log(filterClasses(["c--color-functional-alert-100"])) // {color: var(--color-functional-alert-100)}
 // console.log(filterClasses(["color--color-functional-alert-100"])) // {color: var(--color-functional-alert-100)}
