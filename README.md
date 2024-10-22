@@ -18,31 +18,31 @@ Run the following command to start generatic css utilities:
 ```
 Now import the generated css file to the project root file, start watching for changes in your root directory and automatically regenerate the CSS utilities. 
 
-## Dictionary
-| Property                | Class      | CSS Output                       | ___ | Property                | Class      | CSS Output                       |
-|-------------------------|------------|----------------------------------|----|-------------------------|------------|----------------------------------|
-| display                 | .d-f      | { display: flex }                | ___ | justify-content          | .jc-c      | { justify-content: center }      |
-|                         | .d-n      | { display: none }                | ___ |                          | .jc-sb     | { justify-content: space-between }|
-|                         | .d-b      | { display: block }               | ___ |                          | .jc-sa     | { justify-content: space-around } |
-|                         | .d-g      | { display: grid }                | ___ |                          | .jc-fe     | { justify-content: flex-end }    |
-| flex-direction          | .fd-r    | { flex-direction: row }          | ___ | align-items             | .ai-c    | { align-items: center }          |
-|                         | .fd-c    | { flex-direction: column }       | ___ |                         | .ai-s    | { align-items: start }           |
-|                         | .fd-rr   | { flex-direction: row-reverse }  | ___ |                         | .ai-e    | { align-items: end }             |
-|                         | .fd-cr   | { flex-direction: column-reverse }| ___ |                         | .ai-ba    | { align-items: baseline }        |
-|                         | .fd-d    | { flex-direction: inherit }      | ___ | align-content           | .ac-s    | { align-content: start }         |
-|                         | .fd-n    | { flex-direction: none }         | ___ |                         | .ac-e    | { align-content: end }           |
-|                         | .fd-r    | { flex-direction: row }          | ___ |                         | .ac-c    | { align-content: center }        |
-|                         | .fd-c    | { flex-direction: column }       | ___ |                         | .ac-ba    | { align-content: baseline }      |
-| grid-template-columns    | .gtc-2  | { grid-template-columns: 2 } | ___ | gap                     | .gap      | { gap: value }                  |
-|                         | .gtc-3  | { grid-template-columns: 3 } | ___ | gap                     | .gap-40      | { gap: 40px }                  |
-|                         | .gtc-4  | { grid-template-columns: 4 } | ___ | gap                     | .gap-20vw      | { gap: 20vw }                  |
-|                         | .gtc-5  | { grid-template-columns: 5 } | ___ | gap                     | .gap-80      | { gap: 80px }                  |
-| margin                  | .m        | { margin: value }                | ___ | padding                 | .p        | { padding: value }              |
-|                         | .ml-40       | { margin-left: 40px }           | ___ | padding-left            | .pl-40       | { padding-left: 40px }         |
-|                         | .mr-20vw       | { margin-right: 20vw }          | ___ | padding-right           | .pr-20vw       | { padding-right: 20vw }        |
-|                         | .mt-80       | { margin-top: 80px }            | ___ | padding-top             | .pt-80       | { padding-top: 80px }          |
-|                         | .mb       | { margin-bottom: value }         | ___ | padding-bottom          | .pb       | { padding-bottom: value }       |
-
+## Dictionary <small>[source](https://github.com/JimGitFE/css-utilities-generator/blob/main/src/dictionary.ts)</small>
+| ░ | Property                | Class      | CSS Output                       | ░ | Property                | Class      | CSS Output                       |
+|---|-------------------------|------------|----------------------------------|----|-------------------------|------------|----------------------------------|
+| ▀ | display                 | .d-f      | { display: flex }                | ▀ | justify-content          | .jc-c      | { justify-content: center }      |
+| ░ |                         | .d-n      | { display: none }                | ░ |                          | .jc-sb     | { justify-content: space-between }|
+| ░ |                         | .d-b      | { display: block }               | ░ |                          | .jc-sa     | { justify-content: space-around } |
+| ░ |                         | .d-g      | { display: grid }                | ░ |                          | .jc-fe     | { justify-content: flex-end }    |
+| ▀ | flex-direction          | .fd-r    | { flex-direction: row }          | ▀ | align-items             | .ai-c    | { align-items: center }          |
+| ░ |                         | .fd-c    | { flex-direction: column }       | ░ |                         | .ai-s    | { align-items: start }           |
+| ░ |                         | .fd-rr   | { flex-direction: row-reverse }  | ░ |                         | .ai-e    | { align-items: end }             |
+| ░ |                         | .fd-cr   | { flex-direction: column-reverse }| ░ |                         | .ai-ba    | { align-items: baseline }        |
+| ░ |                         | .fd-d    | { flex-direction: inherit }      | ▀ | align-content           | .ac-s    | { align-content: start }         |
+| ░ |                         | .fd-n    | { flex-direction: none }         | ░ |                         | .ac-e    | { align-content: end }           |
+| ░ |                         | .fd-r    | { flex-direction: row }          | ░ |                         | .ac-c    | { align-content: center }        |
+| ░ |                         | .fd-c    | { flex-direction: column }       | ░ |                         | .ac-ba    | { align-content: baseline }      |
+| ▀ | grid-template-columns    | .gtc-2  | { grid-template-columns: 2 } | ▀ | gap                     | .gap      | { gap: value }                  |
+| ░ |                         | .gtc-3  | { grid-template-columns: 3 } | ░ |                         | .gap-40      | { gap: 40px }                  |
+| ░ |                         | .gtc-4  | { grid-template-columns: 4 } | ░ |                         | .gap-20vw      | { gap: 20vw }                  |
+| ░ |                         | .gtc-5  | { grid-template-columns: 5 } | ░ |                         | .gap-80      | { gap: 80px }                  |
+| ▀ | margin                  | .m        | { margin: value }                | ▀ | padding                 | .p        | { padding: value }              |
+| ░ |                         | .ml-40       | { margin-left: 40px }           | ░ | padding-left            | .pl-40       | { padding-left: 40px }         |
+| ░ |                         | .mr-20vw       | { margin-right: 20vw }          | ░ | padding-right           | .pr-20vw       | { padding-right: 20vw }        |
+| ░ |                         | .mt-80       | { margin-top: 80px }            | ░ | padding-top             | .pt-80       | { padding-top: 80px }          |
+| ░ |                         | .mb       | { margin-bottom: value }         | ░ | padding-bottom          | .pb       | { padding-bottom: value }       |
+> [dictionary.ts](https://github.com/JimGitFE/css-utilities-generator/blob/main/src/dictionary.ts)
 ## Example
 ```html
   <main className="ml-50 mr-50">
@@ -62,6 +62,7 @@ Now import the generated css file to the project root file, start watching for c
 > utilities.css
 
 ## Configuration File (Defaults)
+Write your own dictionary with extendKeys, extendValues or acceptAnyVariable: true altogether
 ```javascript
 {
     "acceptAnyVariable": true, /* Matching only dictionary or extension properties, Defaults to false */
