@@ -8,7 +8,7 @@ const nodemonProcess = spawn('npx', [
     'nodemon',
     '--watch', readFrom,
     '--ext', extensions,
-    '--exec', 'css-utilities-generator generate',
+    '--exec', 'css-utils generate',
     ...exclude.flatMap(pattern => ['--ignore', pattern])
   ], {
     stdio: 'inherit',

@@ -64,9 +64,9 @@ Now import the generated css file to the project root file, start watching for c
 ## Configuration File (Defaults)
 ```javascript
 {
-    "onlyDictionary": true, /* Matching only dictionary or extension properties, Defaults to false */
-    "acceptAnyKey": false,
-    "acceptAnyValue": true,
+    "acceptAnyVariable": true, /* Matching only dictionary or extension properties, Defaults to false */
+    "acceptAnyKey": false, /* Applies only key */
+    "acceptAnyValue": true, /* Applies only value */
     "units": "rem", /* Defines unit for those css properties with numeric values or others, Defaults to "px" */
     "extendKeys": /* Extend default dictionary abbreviations */ 
     {

@@ -77,7 +77,7 @@ function inDictionary(dictionary: Record<string, any>, shortKey: string): boolea
  * ```
  */
 const filterClasses = (classes: string[]): utilityClass[] => {
-    const {onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
+    const {acceptAnyVariable: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
     /** @example ["m-1.6:hover", "m", "1.6"] */
@@ -193,7 +193,7 @@ interface Config {
   /**
    * Only accept classes that are in the dictionary and number values or directory variables
   */
-  onlyDictionary?: boolean;
+  acceptAnyVariable?: boolean;
   acceptAnyKey?: boolean;
   /**
    * Accept (value + unit) or any value
