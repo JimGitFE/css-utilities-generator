@@ -1,26 +1,26 @@
-const { filterClasses } = require('../dist/helpers.js');
-const { createConfigFile, deleteConfigFile } = require('../dist/tests/util.js');
+const { filterClasses } = require('../../dist/helpers.js');
+const { createConfigFile, deleteConfigFile } = require('../../dist/tests/utils.js');
 
-// onlyDictionary Config
+// acceptAnyVariable Config
 
-test('Accept only keys & values in dictionary {"onlyDictionary": true} ', () => {
+test('Accept only keys & values in dictionary {"acceptAnyVariable": true} ', () => {
     // Test proeprties in dictionary
     const attributes = ["height-25px", "anykey-anyvalue"]
     
     // Usage
-    createConfigFile({"onlyDictionary": true});
+    createConfigFile({"acceptAnyVariable": true});
     
     expect(filterClasses(attributes)).toEqual([
         
     ]);
 });
 
-test('Accept any property key & value {"onlyDictionary": false}', () => {
+test('Accept any property key & value {"acceptAnyVariable": false}', () => {
     // Test any properties
     const attributes = ["height-2rem", "anykey-anyvalue"]
     
     // Usage
-    createConfigFile({"onlyDictionary": false});
+    createConfigFile({"acceptAnyVariable": false});
     
     expect(filterClasses(attributes)).toEqual([ 
         { fullClass: 'height-2rem', classKey: 'height', classValue: '2rem' }, 
@@ -28,12 +28,12 @@ test('Accept any property key & value {"onlyDictionary": false}', () => {
     ]);
 });
 
-test('Accept any property key & value {"onlyDictionary": false}', () => {
+test('Accept any property key & value {"acceptAnyVariable": false}', () => {
     // Test any properties
     const attributes = ["height-2rem", "anykey-anyvalue"]
     
     // Usage
-    createConfigFile({"onlyDictionary": false});
+    createConfigFile({"acceptAnyVariable": false});
     
     expect(filterClasses(attributes)).toEqual([ 
         { fullClass: 'height-2rem', classKey: 'height', classValue: '2rem' }, 

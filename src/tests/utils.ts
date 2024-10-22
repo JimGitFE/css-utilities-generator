@@ -1,18 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const defaultJSON = `{
-    "onlyDictionary": true,
-    "units": "rem",
-    "extendKeys": 
-    {
-        "fs": {"name": "font-size", "valueExtension": "abc"},
-        "fi": {"name": "filter", "valueExtension": ""}
-    },
-    "writeTo": "src/styles/utilities.css",
-    "readFrom": "src/"
-}`
-
 export function createConfigFile(content: string) {  
     // Construct the path to the root directory
     const rootDir = path.resolve(__dirname, '../..');

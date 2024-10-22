@@ -3,6 +3,7 @@ import fs from 'fs';
 import * as parser from '@babel/parser';
 import traverse from "@babel/traverse";
 import { shortKeys, shortValues } from './dictionary';
+import { getDirectories } from './utils';
 
 interface utilityClass {
     fullClass: string, // The raw input class name, ex. 'm-10'
@@ -12,7 +13,7 @@ interface utilityClass {
 
 /** Get the package version from package.json */
 const packageVersion = () => {
-  return JSON.parse(fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf8')).version
+  return JSON.parse(fs.readFileSync(path.resolve(getDirectories().package, 'package.json'), 'utf8')).version
 }
 
 /** Classes from attributes node 
@@ -76,7 +77,7 @@ function inDictionary(dictionary: Record<string, any>, shortKey: string): boolea
  * ```
  */
 const filterClasses = (classes: string[]): utilityClass[] => {
-    const {onlyDictionary: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
+    const {acceptAnyVariable: notAcceptAny = true, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
     /** @example ["m-1.6:hover", "m", "1.6"] */
@@ -156,24 +157,6 @@ const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: strin
     fs.writeFileSync(filePath, utilitiesCSS);
 }
 
-export class ProcessRetriever {
-    private args: string[];
-
-    constructor(process: NodeJS.Process) {
-        this.args = process.argv.slice(2);
-    }
-
-    get(flagName: string) {
-        let flagValue;
-        this.args.forEach((arg, index) => {
-            if (arg === `--${flagName}`) {
-                flagValue = this.args[index + 1];
-            }
-        });
-        return flagValue;
-    }
-}
-
 function readDir(dir: string, exclude: string[] = []): any {
   return fs.readdirSync(dir, { withFileTypes: true })
     .filter((dirent: fs.Dirent) => !exclude.includes(dirent.name))
@@ -184,11 +167,11 @@ function readDir(dir: string, exclude: string[] = []): any {
 }
 
 const getFilePaths = (dir: string): string[] => {
-    const {extensions = ["tsx", "ts", "js", "jsx"], exclude = ["node_modules", ".git"]} = readConfigFile()
+    const {extensions = "tsx,ts,js,jsx", exclude = ["node_modules", ".git"]} = readConfigFile()
     
     let files: string[] = [];
     for (const file of readDir(dir, exclude)) {
-      if (extensions.some(ext => file.endsWith(ext))) {
+      if (extensions.split(",").some(ext => file.endsWith(ext))) {
           files.push(file.replace(/\\/g, '/'));
       }
     }
@@ -210,7 +193,7 @@ interface Config {
   /**
    * Only accept classes that are in the dictionary and number values or directory variables
   */
-  onlyDictionary?: boolean;
+  acceptAnyVariable?: boolean;
   acceptAnyKey?: boolean;
   /**
    * Accept (value + unit) or any value
@@ -223,7 +206,7 @@ interface Config {
   writeTo?: string;
   readFrom?: string;
   // Files to be interpreted, have this extensions
-  extensions?: string[];
+  extensions?: string;
   exclude?: string[];
 }
 
