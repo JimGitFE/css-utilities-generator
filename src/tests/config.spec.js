@@ -3,24 +3,24 @@ const { createConfigFile, deleteConfigFile } = require('../../dist/tests/utils.j
 
 // acceptAnyVariable Config
 
-test('Accept only keys & values in dictionary {"acceptAnyVariable": true} ', () => {
+test('Accept only keys & values in dictionary {"acceptAnyVariable": false} ', () => {
     // Test proeprties in dictionary
     const attributes = ["height-25px", "anykey-anyvalue"]
     
     // Usage
-    createConfigFile({"acceptAnyVariable": true});
+    createConfigFile({"acceptAnyVariable": false});
     
     expect(filterClasses(attributes)).toEqual([
         
     ]);
 });
 
-test('Accept any property key & value {"acceptAnyVariable": false}', () => {
+test('Accept any property key & value {"acceptAnyVariable": true}', () => {
     // Test any properties
     const attributes = ["height-2rem", "anykey-anyvalue"]
     
     // Usage
-    createConfigFile({"acceptAnyVariable": false});
+    createConfigFile({"acceptAnyVariable": true});
     
     expect(filterClasses(attributes)).toEqual([ 
         { fullClass: 'height-2rem', classKey: 'height', classValue: '2rem' }, 
@@ -28,12 +28,12 @@ test('Accept any property key & value {"acceptAnyVariable": false}', () => {
     ]);
 });
 
-test('Accept any property key & value {"acceptAnyVariable": false}', () => {
+test('Accept any property key & value {"acceptAnyVariable": true}', () => {
     // Test any properties
     const attributes = ["height-2rem", "anykey-anyvalue"]
     
     // Usage
-    createConfigFile({"acceptAnyVariable": false});
+    createConfigFile({"acceptAnyVariable": true});
     
     expect(filterClasses(attributes)).toEqual([ 
         { fullClass: 'height-2rem', classKey: 'height', classValue: '2rem' }, 

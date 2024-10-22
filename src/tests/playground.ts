@@ -23,7 +23,7 @@ import { filterClasses } from "../helpers";
 
 
 // /* with config:
-// * acceptAnyVariable: false
+// * acceptAnyVariable: true
 // */
 
 // console.log(filterClasses(["h-100"])) // {height: 100px}
@@ -41,7 +41,7 @@ import { filterClasses } from "../helpers";
 // console.log(filterClasses(["h-100%"])) //
 
 // /* with config:
-// * acceptAnyVariable: true
+// * acceptAnyVariable: false
 // */
 
 // console.log(filterClasses(["h-100"])) // {height: 100px}
