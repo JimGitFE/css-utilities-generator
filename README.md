@@ -5,18 +5,23 @@
 TypeScript utility package that generates a utilities.css file on demand with shorthand class names for common CSS properties. By using intuitive notations like d-f (display: flex) as values for className attributes inside your jsx, this package streamlines your styling process, making your main CSS structure cleaner, reusable and more maintainable while ensuring consistent, efficient application of styles across your project.
 
 ## Installation & Setup (Auto)
-First, run create-css-utilities auto executable, installing css-utilities-generator, dependencies and configuration files into your project:
+First, run css-utils init CLI command, Initializes a css-utilities-creator configuration at your project root ([cuconfig.json](#configuration-file-defaults)) with properties as `writeTo` (generated css directory/fileName) `readFrom` (useful to avoid watching changes on unnecessary directories) and utils excecutable script:
 ```bash
 # Automatic installation executable:
-> npx create-css-utilities
+> npx css-utils init
 ```
+A css file with on demand generated class utilities from jsx/tsx className attributes, is generated at `writeTo` path, default: ./styles/utilities.css Imported properly at main root project file:
+```typescript
+import "@/styles/index.scss"
+```
+> app/layout.tsx
 
-Run the following command to start generatic css utilities:
+Run the following command to start generating css utilities on save:
 ```bash
 # Run the following command (generates css utilities on save):
 > npm run utils
 ```
-Now import the generated css file to the project root file, start watching for changes in your root directory and automatically regenerate the CSS utilities. 
+Now the generated css file is imported to the project root file, start watching for changes in your root directory and automatically regenerate the CSS utilities. 
 
 ## Dictionary <small>[source](https://github.com/JimGitFE/css-utilities-generator/blob/main/src/dictionary.ts)</small>
 | ░ | Property                | Class      | CSS Output                       | ░ | Property                | Class      | CSS Output                       |
@@ -38,10 +43,10 @@ Now import the generated css file to the project root file, start watching for c
 | ░ |                         | .gtc-4  | { grid-template-columns: 4 } | ░ |                         | .gap-20vw      | { gap: 20vw }                  |
 | ░ |                         | .gtc-5  | { grid-template-columns: 5 } | ░ |                         | .gap-80      | { gap: 80px }                  |
 | ▀ | margin                  | .m        | { margin: value }                | ▀ | padding                 | .p        | { padding: value }              |
-| ░ |                         | .ml-40       | { margin-left: 40px }           | ░ | padding-left            | .pl-40       | { padding-left: 40px }         |
-| ░ |                         | .mr-20vw       | { margin-right: 20vw }          | ░ | padding-right           | .pr-20vw       | { padding-right: 20vw }        |
-| ░ |                         | .mt-80       | { margin-top: 80px }            | ░ | padding-top             | .pt-80       | { padding-top: 80px }          |
-| ░ |                         | .mb       | { margin-bottom: value }         | ░ | padding-bottom          | .pb       | { padding-bottom: value }       |
+| ░ |                         | .ml-40       | { margin-left: 40px }           | ░ |                         | .pl-40       | { padding-left: 40px }         |
+| ░ |                         | .mr-20vw       | { margin-right: 20vw }          | ░ |                        | .pr-20vw       | { padding-right: 20vw }        |
+| ░ |                         | .mt-80       | { margin-top: 80px }            | ░ |                          | .pt-80       | { padding-top: 80px }          |
+| ░ |                         | .mb       | { margin-bottom: value }         | ░ |                       | .pb       | { padding-bottom: value }       |
 > [dictionary.ts](https://github.com/JimGitFE/css-utilities-generator/blob/main/src/dictionary.ts)
 ## Example
 ```html
