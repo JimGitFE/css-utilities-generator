@@ -144,7 +144,7 @@ const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: strin
     let utilitiesCSS: string = '';
 
     // 3 Format utilityClass into .CSS
-    classes.forEach(({ fullClass, classKey, classValue }) => {
+    classes.sort((a, b) => a.fullClass.localeCompare(b.fullClass)).forEach(({ fullClass, classKey, classValue }) => {
       utilitiesCSS += `.${fullClass} { ${classKey}: ${classValue}; }\n`;
     });
     // Create the directory if it doesn't exist
