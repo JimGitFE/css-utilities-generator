@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as path from 'path';
 import { ProcessRetriever, executeFile } from "./utils";
-import commandsMap from "./commandList";
+import commandsMap from "./commands";
 import { getDirectories } from '../utils';
 
 const cli = new ProcessRetriever(process, commandsMap);
