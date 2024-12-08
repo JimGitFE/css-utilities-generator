@@ -1,5 +1,5 @@
 import { spawn } from 'child_process';
-import { readConfigFile } from '../helpers';
+import { readConfigFile } from '../../helpers';
 
 const { exclude = [], readFrom = "./", extensions = "tsx,ts,js,jsx" } = readConfigFile()
 

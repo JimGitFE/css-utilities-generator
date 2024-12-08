@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
-import { addScriptToPackageJson, writeFileInRoot, askUser, isValidPath } from '../utils';
+import { addScriptToPackageJson, writeFileInRoot, askUser, isValidPath } from '../../utils';
 
 /** Default configuration */
 let cuconfig = {
@@ -12,7 +12,8 @@ let cuconfig = {
     exclude: ["node_modules", ".git", ".*/**/*"]
 };
 
-/**
+/** Installation Walkthrough
+ * 
  * 1 Add script to package.json
  * 2 Generate config file
  * 3 CSS Utilities Explanation
@@ -25,7 +26,7 @@ let cuconfig = {
     
     console.log('\n')
 
-    /* 3 Generate config file */
+    /* 2 Generate config file */
 
     const watchPath = await askUser(`Watch for on save changes at path ${chalk.yellow.dim.italic(`(default: ${"./"})`)}: `,"", '', (userInput) => {
         if (userInput && isValidPath(userInput)) {
@@ -52,7 +53,7 @@ let cuconfig = {
     await writeFileInRoot("cuconfig.json", cuconfig)
     console.log(chalk.gray(`Cuconfig added Successfully \n`));
     
-    /* 4 Generate CSS Utilities */
+    /* 3 Generate CSS Utilities Explanation */
     
     console.log(`Congratulations! to generate css utilities on save follow: \n`);
     console.log(`    ${chalk.cyan.bgBlack.bold("npm run utils")} \n`);
