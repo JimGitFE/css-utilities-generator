@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 import * as path from 'path';
-import { ProcessRetriever, executeFile } from "./utils";
-import commandsMap from "./commands";
+import { ProcessRetriever, executeScript } from "./utils";
+import commandsMap from "./constants";
 import { getDirectories } from '../utils';
 
 const cli = new ProcessRetriever(process, commandsMap);
 
-/** Main */
-const commandInstance = commandsMap[cli.command() as keyof typeof commandsMap];
+/** Gets Action for a given user input command (flag) */
+const { action } = commandsMap[cli.command()];
 
-if (commandInstance.action[0]) {
-    executeFile(path.join(getDirectories().package, commandInstance.action[1]));
+if (action[0]) {
+    executeScript(path.join(getDirectories().package, action[1]));
 } else {
-    console.log(commandInstance.action[1]);
+    console.log(action[1]);
 }

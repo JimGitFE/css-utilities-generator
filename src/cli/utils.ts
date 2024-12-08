@@ -4,13 +4,13 @@ export class ProcessRetriever {
     private commandsMap: CommandsMap;
 
     constructor(process: NodeJS.Process, commandsMap: CommandsMap) {
-        this.args = process.argv.slice(2);
+        this.args = process.argv.slice(2); // [0]: path to the Node.js executable, [1]: path to the script file being executed
         this.commandsMap = commandsMap;
     }
 
-    /** Main Command */
+    /** Returns full command str (if valid, else errors avaiable commands) */
     command(): keyof typeof this.commandsMap {
-        const main = this.args[0]; // Main Arg command
+        const main = this.args[0]; // First user command-line argument (flag)
         const fulls = Object.keys(this.commandsMap);
         const shorts = Object.values(this.commandsMap).map(c=>c.short);
         
@@ -24,7 +24,7 @@ export class ProcessRetriever {
         process.exit(1);
     }
 
-    /** Flag */
+    /** Flag @deprecated */
     get(flagName: string) {
         let flagValue;
         const flags = this.args.slice(1);
@@ -39,7 +39,7 @@ export class ProcessRetriever {
 }
 
 /** Execute file */
-export const executeFile = (path: string) => {
+export const executeScript = (path: string) => {
     const { spawn } = require('child_process');
     const child = spawn('node', [path], { stdio: 'inherit' });
   

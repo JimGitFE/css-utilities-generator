@@ -1,14 +1,10 @@
 import { readConfigFile } from "./helpers";
 
-interface Abreviations {
-    shortKeys: {[key: string]: {name: string; valueExtension: string;}},
-    shortValues: {[key: string]: string}
-}
-
+/* User Config (sourced from cuconfig.json) */
 const units  = readConfigFile().units || "px"; 
 const { extendKeys, extendValues } = readConfigFile()
 
-const dictionary: Abreviations  = {
+const dictionary: Dictionary  = {
     shortValues: {
         // Usual but not specific to: 
         a: 'auto',
