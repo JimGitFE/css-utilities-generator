@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
-import parser from "@babel/parser";
+import * as parser from "@babel/parser";
 import traverse from "@babel/traverse";
 // Local
 import { shortKeys, shortValues } from "../constants";
