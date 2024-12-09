@@ -1,5 +1,5 @@
 /** Command Reader */
-export class ProcessRetriever {
+class ProcessRetriever {
     private args: string[];
     private commandsMap: CommandsMap;
 
@@ -38,12 +38,4 @@ export class ProcessRetriever {
     }
 }
 
-/** Execute file */
-export const executeScript = (path: string) => {
-    const { spawn } = require('child_process');
-    const child = spawn('node', [path], { stdio: 'inherit' });
-  
-    child.on('error', (err: Error) => {
-      console.error(`Error executing command: ${err.message}`);
-    });
-  };
+export default ProcessRetriever;

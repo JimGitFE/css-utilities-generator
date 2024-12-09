@@ -2,8 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import * as parser from '@babel/parser';
 import traverse from "@babel/traverse";
-import { shortKeys, shortValues } from './dictionary';
-import { getDirectories } from './utils';
+import { shortKeys, shortValues } from '../dictionary';
 
 interface utilityClass {
     fullClass: string, // The raw input class name, ex. 'm-10'
@@ -11,12 +10,7 @@ interface utilityClass {
     classValue: string // The full CSS property value, ex. [10, '10px']
 }
 
-/** Get the package version from package.json */
-const packageVersion = () => {
-  return JSON.parse(fs.readFileSync(path.resolve(getDirectories().package, 'package.json'), 'utf8')).version
-}
-
-/** Classes from attributes node 
+/** Get classes from className attribute of ast node 
  * 
  * @returns {string[]} - Array of classes
  * @example
@@ -63,12 +57,21 @@ const getClassNames = ({ast}: {ast: parser.ParseResult<File> | any}): string => 
     return allClasses;
 }
   
-
+/** Check if key exists in dictionary
+ * @returns {boolean} - If key exists in dictionary
+ * 
+ * @example
+ * ```ts
+ * const inDict = inDictionary(shortKeys, 'm');
+ * console.log(inDict); // true
+ * ```
+ */
 function inDictionary(dictionary: Record<string, any>, shortKey: string): boolean {
   return Object.keys(dictionary).includes(shortKey);
 }
 
-/** Classes filter duplicates & utilities dictionary matches
+/** Filter classes for duplicates & dictionary matches
+ * 
  * @returns {string[]} - Dictionary matched classes
  * @example
  * ```ts
@@ -222,4 +225,4 @@ function readConfigFile(): Config {
 }
 
 export type { utilityClass }
-export { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion }
+export { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile }
