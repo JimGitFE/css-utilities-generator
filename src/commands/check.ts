@@ -2,13 +2,13 @@
 /** Generate utils and compare with current */
 import fs from 'fs';
 // Local
-import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion } from '@/utils';
+import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readUserConfig, packageVersion } from '@/utils';
 
 /** run utils welcome - current version */
 console.log(`\nUtility CSS Generator v${packageVersion()}\n`);
 
 /** Directories. Write: generated css utils. Read: classNames to interpret */
-const { writeTo = "./styles/utilities.css", readFrom = "./" } = readConfigFile()
+const { writeTo = "./styles/utilities.css", readFrom = "./" } = readUserConfig()
 
 // 1 Get File paths
 const filePaths = getFilePaths(readFrom);

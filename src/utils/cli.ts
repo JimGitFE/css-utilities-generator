@@ -50,6 +50,18 @@ export function isValidPath(filePath: string): boolean {
     }
   }
 
+/** Return parsed user config from cuconfig.json */
+export function readUserConfig(): Config {
+  const filePath = "./cuconfig.json";
+  try {
+    const data = fs.readFileSync(filePath, 'utf8');
+    const config = JSON.parse(data);
+    return config;
+  } catch (err) {
+    return {};
+  }
+}
+
 //   /** deprecated with install dep */
 // const runCommand = (command: string) => {
 //     try {

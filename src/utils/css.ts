@@ -4,14 +4,76 @@ import parser from '@babel/parser';
 import traverse from "@babel/traverse";
 // Local
 import { shortKeys, shortValues } from '@/constants';
+import { readUserConfig } from '@/utils';
 
-export interface utilityClass {
-    fullClass: string, // The raw input class name, ex. 'm-10'
-    classKey: string, // The full CSS property key, ex. ['m', margin]
-    classValue: string // The full CSS property value, ex. [10, '10px']
+/**
+ * 1 Return absolute paths to all files with matching extensions from user config.
+ *
+ * @param dir - The directory to search for files.
+ * @returns An array of absolute paths to files with matching extensions.
+ *
+ * @example
+ * ```typescript
+ * const filePaths = getFilePaths('/path/to/directory');
+ * console.log(filePaths);
+ * // Output: ['/path/to/directory/file1.ts', '/path/to/directory/file2.js', ...]
+ * ```
+ */
+export function getFilePaths (dir: string): string[]  {
+  const {extensions = "tsx,ts,js,jsx", exclude = ["node_modules", ".git"]} = readUserConfig()
+  
+  function readDir(dir: string, exclude: string[] = []): any {
+    return fs.readdirSync(dir, { withFileTypes: true })
+      .filter((dirent: fs.Dirent) => !exclude.includes(dirent.name))
+      .flatMap((dirent: fs.Dirent) => {
+        const filePath = path.join(dir, dirent.name);
+        return dirent.isDirectory() ? readDir(filePath, exclude) : filePath;
+      });
+  }
+
+  let files: string[] = [];
+  for (const file of readDir(dir, exclude)) {
+    if (extensions.split(",").some(ext => file.endsWith(ext))) {
+        files.push(file.replace(/\\/g, '/'));
+    }
+  }
+  
+  return files;
 }
 
-/** Get classes from className attribute of ast node 
+/**
+ * 2 Parse the provided tsx code as an entire ECMAScript program into AST.
+ *
+ * @param filePath - The path to the file to be parsed.
+ * @returns The Abstract Syntax Tree (AST) of the parsed code.
+ *
+ * @example
+ * ```typescript
+ * import { generateAST } from './path/to/css';
+ * import * as parser from '@babel/parser';
+ * import * as fs from 'fs';
+ *
+ * // Example file path
+ * const filePath = './path/to/file.tsx';
+ *
+ * // Generate the AST
+ * const ast = generateAST(filePath);
+ *
+ * // Output the AST
+ * console.log(JSON.stringify(ast, null, 2));
+ * ```
+ */
+export function generateAST (filePath: string): parser.ParseResult<File> | any {
+  const code = fs.readFileSync(filePath, 'utf-8');
+
+  // Parse the code
+  return parser.parse(code, {
+    sourceType: 'module',
+    plugins: ['jsx', 'typescript'],
+  });
+}
+
+/** 3 Get classes from className attribute of ast node 
  * 
  * @returns {string[]} - Array of classes
  * @example
@@ -58,7 +120,7 @@ export function getClassNames ({ast}: {ast: parser.ParseResult<File> | any}): st
     return allClasses;
 }
 
-/** Check if key exists in dictionary
+/** 4 Check if class key exists in dictionary
  * @returns {boolean} - If key exists in dictionary
  * 
  * @example
@@ -67,13 +129,22 @@ export function getClassNames ({ast}: {ast: parser.ParseResult<File> | any}): st
  * console.log(inDict); // true
  * ```
  */
-export function inDictionary(dictionary: Dictionary["shortKeys"] | Dictionary["shortValues"], shortKey: string): boolean  {
+function inDictionary(dictionary: Dictionary["shortKeys"] | Dictionary["shortValues"], shortKey: string): boolean  {
   return Object.keys(dictionary).includes(shortKey);
 }
 
-/** Filter classes for duplicates & dictionary matches
+interface utilityClass {
+  /** The raw input class name, ex. 'm-10' */
+  fullClass: string, 
+  /** The full CSS property key, ex. ['m', margin] */
+  classKey: string, 
+  /** The full CSS property value, ex. [10, '10px'] */
+  classValue: string 
+}
+
+/** 5 Filter classes for duplicates & dictionary matches utilityClass
  * 
- * @returns {string[]} - Dictionary matched classes
+ * @returns {utilityClass[]} - Dictionary matched classes as utilityClass
  * @example
  * ```ts
  * const classes = filterClasses(['m-10', 'd-f', 'jc-sb', 'ai-c', 'h-100', 'h--spacing-4']);
@@ -81,7 +152,7 @@ export function inDictionary(dictionary: Dictionary["shortKeys"] | Dictionary["s
  * ```
  */
 export function filterClasses (classes: string[]): utilityClass[] {
-    const {acceptAnyVariable = false, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
+    const {acceptAnyVariable = false, acceptAnyKey = false, acceptAnyValue = true} = readUserConfig()
     let utilityClasses: utilityClass[] = [];
   
     /** @example ["m-1.6:hover", "m", "1.6"] */
@@ -144,6 +215,18 @@ export function filterClasses (classes: string[]): utilityClass[] {
     return utilityClasses;
 }
 
+/** 6 Write CSS file from utilityClass[]
+ * 
+ * @example
+ * ```ts
+ * writeCSS({classes, filePath: writeTo})
+ * ```
+ *  Writes to utilities.css
+ * ```css
+ * .m-10 { margin: 10px; }
+ * .d-f { display: flex; }
+ * ```
+ */
 export function writeCSS ({classes, filePath}: {classes: utilityClass[], filePath: string}) {
     let utilitiesCSS: string = '';
 
@@ -159,68 +242,4 @@ export function writeCSS ({classes, filePath}: {classes: utilityClass[], filePat
 
     // 4 Write to File
     fs.writeFileSync(filePath, utilitiesCSS);
-}
-
-export function readDir(dir: string, exclude: string[] = []): any {
-  return fs.readdirSync(dir, { withFileTypes: true })
-    .filter((dirent: fs.Dirent) => !exclude.includes(dirent.name))
-    .flatMap((dirent: fs.Dirent) => {
-      const filePath = path.join(dir, dirent.name);
-      return dirent.isDirectory() ? readDir(filePath, exclude) : filePath;
-    });
-}
-
-export function getFilePaths (dir: string): string[]  {
-    const {extensions = "tsx,ts,js,jsx", exclude = ["node_modules", ".git"]} = readConfigFile()
-    
-    let files: string[] = [];
-    for (const file of readDir(dir, exclude)) {
-      if (extensions.split(",").some(ext => file.endsWith(ext))) {
-          files.push(file.replace(/\\/g, '/'));
-      }
-    }
-    
-    return files;
-}
-
-export function generateAST (filePath: string): parser.ParseResult<File> | any {
-  const code = fs.readFileSync(filePath, 'utf-8');
-
-  // Parse the code
-  return parser.parse(code, {
-    sourceType: 'module',
-    plugins: ['jsx', 'typescript'],
-  });
-}
-
-interface Config {
-  /**
-   * Only accept classes that are in the dictionary and number values or directory variables
-  */
-  acceptAnyVariable?: boolean;
-  acceptAnyKey?: boolean;
-  /**
-   * Accept (value + unit) or any value
-  */
-  acceptAnyValue?: boolean;
-  units?: "px" | "rem" | "em" | "vh" | "vw" | "vmin" | "vmax" | "%";
-  extendKeys?: {[key:string]:{name: string, valueExtension: string}};
-  extendValues?: Record<string, string>;
-  /** Must include filename, ex. ./src/styles/utilities.css */
-  writeTo?: string;
-  readFrom?: string;
-  // Files to be interpreted, have this extensions
-  extensions?: string;
-  exclude?: string[];
-}
-
-export function readConfigFile(): Config {
-  const filePath = "./cuconfig.json";
-  try {
-    const data = fs.readFileSync(filePath, 'utf8');
-    const config = JSON.parse(data);
-    return config;
-  } catch (err) {
-    return {};
-  }
 }
