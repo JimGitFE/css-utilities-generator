@@ -13,7 +13,7 @@
         "rm-config": "rimraf -rf ./cuconfig.json"
     },
     "bin": {
-        "css-utils": "./dist/cli/index.js"
+        "css-utils": "./dist/cli.js"
     },
     "repository": {
         "type": "git",
