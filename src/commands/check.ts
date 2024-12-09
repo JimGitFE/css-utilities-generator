@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /** Generate utils and compare with current */
-import fs from "fs";
+import * as fs from "fs";
 // Local
 import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readUserConfig, packageVersion } from "@/utils";
 

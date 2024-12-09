@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import path from "path";
+import * as path from "path";
 // Local
 import { executeScript, pathTo } from "@/utils";
 import ProcessRetriever from "./Process";

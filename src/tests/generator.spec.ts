@@ -1,4 +1,5 @@
-const { filterClasses } = require("../../dist/utils");
+// const { filterClasses } = require("../../dist/utils");
+import { filterClasses } from "../utils";
 // Config: empty
 
 test("Numeric Values", () => {

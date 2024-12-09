@@ -1,4 +1,7 @@
-const { filterClasses, createConfigFile, deleteConfigFile } = require("../../dist/utils");
+// const { filterClasses } = require("../../dist/utils");
+// const { createConfigFile, deleteConfigFile } = require("../../dist/tests/utils");
+import { createConfigFile, deleteConfigFile } from "./utils";
+import { filterClasses } from "../utils";
 
 // acceptAnyVariable Config
 test('Accept only keys & values in dictionary {"acceptAnyVariable": false} ', () => {
@@ -6,7 +9,7 @@ test('Accept only keys & values in dictionary {"acceptAnyVariable": false} ', ()
     const attributes = ["height-25px", "anykey-anyvalue"];
 
     // Usage
-    createConfigFile({ acceptAnyVariable: false });
+    createConfigFile(JSON.stringify({ acceptAnyVariable: false }));
 
     expect(filterClasses(attributes)).toEqual([]);
 });
@@ -16,7 +19,7 @@ test('Accept any property key & value {"acceptAnyVariable": true}', () => {
     const attributes = ["height-2rem", "anykey-anyvalue"];
 
     // Usage
-    createConfigFile({ acceptAnyVariable: true });
+    createConfigFile(JSON.stringify({ acceptAnyVariable: true }));
 
     expect(filterClasses(attributes)).toEqual([
         { fullClass: "height-2rem", classKey: "height", classValue: "2rem" },
@@ -29,7 +32,7 @@ test('Accept any property key & value {"acceptAnyVariable": true}', () => {
     const attributes = ["height-2rem", "anykey-anyvalue"];
 
     // Usage
-    createConfigFile({ acceptAnyVariable: true });
+    createConfigFile(JSON.stringify({ acceptAnyVariable: true }));
 
     expect(filterClasses(attributes)).toEqual([
         { fullClass: "height-2rem", classKey: "height", classValue: "2rem" },
@@ -44,7 +47,7 @@ test('Accept any key but dictionary values {"acceptAnyKey": true, "acceptAnyValu
     const attributes = ["height-2rem", "height-someHeight", "anykey-25"];
 
     // Usage
-    createConfigFile({ acceptAnyKey: true, acceptAnyValue: false });
+    createConfigFile(JSON.stringify({ acceptAnyKey: true, acceptAnyValue: false }));
     console.log(filterClasses(attributes));
 
     expect(filterClasses(attributes)).toEqual([{ fullClass: "anykey-25", classKey: "anykey", classValue: "25" }]);
@@ -57,7 +60,7 @@ test('Accept any values but dictionary keys {"acceptAnyValue": true}', () => {
     const attributes = ["height-2rem", "height-someHeight", "anykey-25", "w-inherit"];
 
     // Usage
-    createConfigFile("");
+    createConfigFile(JSON.stringify(""));
     console.log(filterClasses(attributes));
 
     expect(filterClasses(attributes)).toEqual([{ fullClass: "w-inherit", classKey: "width", classValue: "inherit" }]);
