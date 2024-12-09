@@ -61,13 +61,3 @@ export function readUserConfig(): Config {
     return {};
   }
 }
-
-//   /** deprecated with install dep */
-// const runCommand = (command: string) => {
-//     try {
-//         execSync(command, { stdio: "inherit" });
-//     } catch (error: any) {
-//         console.error(`Error when executing'${command}' log: ${error.message}`);
-//         process.exit(1);
-//     }
-// };

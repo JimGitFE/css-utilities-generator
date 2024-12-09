@@ -3,11 +3,6 @@ import fs from 'fs';
 // Local
 import { pathTo } from "@/utils";
 
-// /** Deprecated  @deprecated*/
-// export const installDependencies = (dependencies: string[]) => {
-//   runCommand(`npm i -D ${dependencies.join("@latest ")}`);
-// }
-
 /** Write file in user root (dep: initialization of cuconfig.json) */
 export function writeFileInRoot(fileName: string,file: any) {    
   fs.writeFileSync(path.resolve(process.cwd(), fileName), JSON.stringify(file, null, 2), 'utf8');
