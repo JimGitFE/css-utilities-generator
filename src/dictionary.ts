@@ -1,4 +1,4 @@
-import { readConfigFile } from "./helpers";
+import { readConfigFile } from "./utils/css";
 
 /* User Config (sourced from cuconfig.json) */
 const units  = readConfigFile().units || "px"; 
@@ -145,7 +145,7 @@ const dictionary: Dictionary  = {
     pe: { name: "pointer-events", valueExtension: "" },
 
     }
-}
+} as const
 
-const [shortKeys, shortValues] = [{...dictionary.shortKeys, ...extendKeys}, {...dictionary.shortValues, ...extendValues}];
+const [shortKeys, shortValues]: [Dictionary["shortKeys"], Dictionary["shortValues"]] = [{...dictionary.shortKeys, ...extendKeys}, {...dictionary.shortValues, ...extendValues}];
 export { shortKeys, shortValues };

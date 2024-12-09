@@ -56,7 +56,7 @@ const getClassNames = ({ast}: {ast: parser.ParseResult<File> | any}): string => 
     
     return allClasses;
 }
-  
+
 /** Check if key exists in dictionary
  * @returns {boolean} - If key exists in dictionary
  * 
@@ -66,7 +66,7 @@ const getClassNames = ({ast}: {ast: parser.ParseResult<File> | any}): string => 
  * console.log(inDict); // true
  * ```
  */
-function inDictionary(dictionary: Record<string, any>, shortKey: string): boolean {
+function inDictionary(dictionary: Dictionary["shortKeys"] | Dictionary["shortValues"], shortKey: string): boolean  {
   return Object.keys(dictionary).includes(shortKey);
 }
 
