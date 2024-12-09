@@ -1,8 +1,8 @@
 import { spawn } from 'child_process';
 // Local
-import { readConfigFile } from '@/utils';
+import { readUserConfig } from '@/utils';
 
-const { exclude = [], readFrom = "./", extensions = "tsx,ts,js,jsx" } = readConfigFile()
+const { exclude = [], readFrom = "./", extensions = "tsx,ts,js,jsx" } = readUserConfig()
 
 // Spawn the nodemon process
 const nodemonProcess = spawn('npx', [

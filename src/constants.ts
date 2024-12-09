@@ -1,4 +1,4 @@
-import { readConfigFile } from "./utils/css";
+import { readUserConfig } from "@/utils";
 
 /** Commands to Action, [isExecutable, pathToExecutable | log text] */
 const commandsMap: CommandsMap = {
@@ -10,8 +10,8 @@ const commandsMap: CommandsMap = {
 } as const;
 
 /* User Config (sourced from cuconfig.json) */
-const units  = readConfigFile().units || "px"; 
-const { extendKeys, extendValues } = readConfigFile()
+const units  = readUserConfig().units || "px"; 
+const { extendKeys, extendValues } = readUserConfig()
 
 const dictionary: Dictionary  = {
     shortValues: {
