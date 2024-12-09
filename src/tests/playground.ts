@@ -15,12 +15,10 @@ import { filterClasses } from "@/utils";
 //  * acceptAnyValue: true
 //  */
 
-
 // console.log(filterClasses(["h-100"])) // {height: 100px}
 // console.log(filterClasses(["h-100%"])) // {height: 100%}
 // console.log(filterClasses(["h-mxc"])) // {height: max-content}
 // console.log(filterClasses(["height-100"])) //
-
 
 // /* with config:
 // * acceptAnyVariable: true
@@ -49,8 +47,7 @@ import { filterClasses } from "@/utils";
 // console.log(filterClasses(["h-100%"])) //
 // console.log(filterClasses(["height-100"])) //
 // console.log(filterClasses(["h-100", "bto-2"])) //
-filterClasses(["h-50-hover"])[3]
-filterClasses(["h-50hover"])[3]
+filterClasses(["h-50-hover"])[3];
+filterClasses(["h-50hover"])[3];
 
-
-filterClasses(["h-50"])
+filterClasses(["h-50"]);

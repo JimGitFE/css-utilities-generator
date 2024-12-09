@@ -1,43 +1,43 @@
-import path from 'path';
-import fs from 'fs';
+import path from "path";
+import fs from "fs";
 // Local
 import { pathTo } from "@/utils";
 
 /** Write file in user root (dep: initialization of cuconfig.json) */
-export function writeFileInRoot(fileName: string,file: any) {    
-  fs.writeFileSync(path.resolve(process.cwd(), fileName), JSON.stringify(file, null, 2), 'utf8');
+export function writeFileInRoot(fileName: string, file: any) {
+    fs.writeFileSync(path.resolve(process.cwd(), fileName), JSON.stringify(file, null, 2), "utf8");
 }
 
 /** Execute file */
-export function executeScript (path: string) {
-    const { spawn } = require('child_process');
-    const child = spawn('node', [path], { stdio: 'inherit' });
-  
-    child.on('error', (err: Error) => {
-      console.error(`Error executing command: ${err.message}`);
+export function executeScript(path: string) {
+    const { spawn } = require("child_process");
+    const child = spawn("node", [path], { stdio: "inherit" });
+
+    child.on("error", (err: Error) => {
+        console.error(`Error executing command: ${err.message}`);
     });
-  };
+}
 
 /** Add script to package.json */
-export function addScriptToPackageJson (scriptName: string, scriptCommand: string) {
-   const packageJsonPath = path.resolve(pathTo().user, 'package.json');
+export function addScriptToPackageJson(scriptName: string, scriptCommand: string) {
+    const packageJsonPath = path.resolve(pathTo().user, "package.json");
 
-  if (!fs.existsSync(packageJsonPath)) {
-      console.error('package.json not found in the current directory.');
-      process.exit(1);
-  }
+    if (!fs.existsSync(packageJsonPath)) {
+        console.error("package.json not found in the current directory.");
+        process.exit(1);
+    }
 
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
 
-  // Ensure scripts section exists
-  if (!packageJson.scripts) {
-      packageJson.scripts = {};
-  }
+    // Ensure scripts section exists
+    if (!packageJson.scripts) {
+        packageJson.scripts = {};
+    }
 
-  // Add or update the script
-  packageJson.scripts[scriptName] = scriptCommand;
+    // Add or update the script
+    packageJson.scripts[scriptName] = scriptCommand;
 
-  // Write changes back to package.json
-  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), 'utf8');
-  console.log(`Script "${scriptName}" added to package.json.`);
+    // Write changes back to package.json
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), "utf8");
+    console.log(`Script "${scriptName}" added to package.json.`);
 }

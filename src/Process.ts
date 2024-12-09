@@ -12,15 +12,15 @@ class ProcessRetriever {
     command(): keyof typeof this.commandsMap {
         const main = this.args[0]; // First user command-line argument (flag)
         const fulls = Object.keys(this.commandsMap);
-        const shorts = Object.values(this.commandsMap).map(c=>c.short);
-        
+        const shorts = Object.values(this.commandsMap).map((c) => c.short);
+
         if (shorts.includes(main)) {
-            return Object.entries(this.commandsMap).find(([key, value]) => value.short === main)![0]
+            return Object.entries(this.commandsMap).find(([key, value]) => value.short === main)![0];
         } else if (fulls.includes(main)) {
             return main;
         }
 
-        console.error(`Available commands: ${fulls.join(', ')}`);
+        console.error(`Available commands: ${fulls.join(", ")}`);
         process.exit(1);
     }
 

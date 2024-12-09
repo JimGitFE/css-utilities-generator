@@ -1,35 +1,35 @@
 name: Create Tag
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [main]
+    pull_request:
+        types: [closed]
+        branches: [main]
 
 jobs:
-  tagging:
-    runs-on: ubuntu-latest
+    tagging:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.10'
+            - name: Setup Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20.10"
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-      - name: get-package-json-version
-        id: get-version
-        uses: BeaconBrigade/package-json-version@v0.3.1
+            - name: get-package-json-version
+              id: get-version
+              uses: BeaconBrigade/package-json-version@v0.3.1
 
-      - name: Create Tag
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git tag "v${{ steps.get-version.outputs.version }}"
-          git push --tags
+            - name: Create Tag
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git tag "v${{ steps.get-version.outputs.version }}"
+                  git push --tags
