@@ -1,8 +1,6 @@
-const { filterClasses } = require('../../dist/helpers.js');
-const { createConfigFile, deleteConfigFile } = require('../../dist/tests/utils.js');
+const { filterClasses, createConfigFile, deleteConfigFile } = require('../../dist/utils');
 
 // acceptAnyVariable Config
-
 test('Accept only keys & values in dictionary {"acceptAnyVariable": false} ', () => {
     // Test proeprties in dictionary
     const attributes = ["height-25px", "anykey-anyvalue"]

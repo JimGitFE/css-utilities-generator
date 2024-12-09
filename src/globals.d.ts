@@ -4,7 +4,7 @@ interface CommandsMap {
         /** Abbreviated command flag */
         short: string, 
         /** [is Executable. Path to executable script] */
-        action: [boolean, `dist/cli/command/${string}` | string]
+        action: [boolean, `dist/commands/${string}` | string]
     }
 }
 
