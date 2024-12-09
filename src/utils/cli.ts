@@ -3,7 +3,7 @@ import fs from 'fs';
 import readline from 'readline';
 
 /** Absolute paths from user to root | package */
-const pathTo = () => {
+export function pathTo() {
     return {
         package: path.resolve(process.cwd(), "node_modules/css-utilities-generator"), // dirname process [1] ..
         user: path.resolve(process.cwd())
@@ -11,7 +11,7 @@ const pathTo = () => {
 } 
 
 /** css-utilities-generator version from package.json */
-const packageVersion = () => {
+export function packageVersion () {
     return JSON.parse(fs.readFileSync(path.resolve(pathTo().package, 'package.json'), 'utf8')).version
   }
 
@@ -41,7 +41,7 @@ return new Promise((resolve, reject) => {
 }
 
 /** Validate user input as path */
-function isValidPath(filePath: string): boolean {
+export function isValidPath(filePath: string): boolean {
     try {
       path.parse(filePath);
       return true;
@@ -59,7 +59,3 @@ function isValidPath(filePath: string): boolean {
 //         process.exit(1);
 //     }
 // };
-
-
-
-export { packageVersion, isValidPath, pathTo };

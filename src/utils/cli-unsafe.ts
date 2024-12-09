@@ -14,7 +14,7 @@ export function writeFileInRoot(fileName: string,file: any) {
 }
 
 /** Execute file */
-export const executeScript = (path: string) => {
+export function executeScript (path: string) {
     const { spawn } = require('child_process');
     const child = spawn('node', [path], { stdio: 'inherit' });
   
@@ -24,7 +24,7 @@ export const executeScript = (path: string) => {
   };
 
 /** Add script to package.json */
-export const addScriptToPackageJson = (scriptName: string, scriptCommand: string) => {
+export function addScriptToPackageJson (scriptName: string, scriptCommand: string) {
    const packageJsonPath = path.resolve(pathTo().user, 'package.json');
 
   if (!fs.existsSync(packageJsonPath)) {

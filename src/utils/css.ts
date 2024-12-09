@@ -5,7 +5,7 @@ import traverse from "@babel/traverse";
 // Local
 import { shortKeys, shortValues } from '@/constants';
 
-interface utilityClass {
+export interface utilityClass {
     fullClass: string, // The raw input class name, ex. 'm-10'
     classKey: string, // The full CSS property key, ex. ['m', margin]
     classValue: string // The full CSS property value, ex. [10, '10px']
@@ -20,7 +20,7 @@ interface utilityClass {
  * console.log(class); // d-f jc-sb ai-c h-100 h--spacing-4
  * ```
  */
-const getClassNames = ({ast}: {ast: parser.ParseResult<File> | any}): string => {
+export function getClassNames ({ast}: {ast: parser.ParseResult<File> | any}): string {
     let allClasses: string = '';
 
     // 1 Traverse the AST (Abstract Syntax Tree)
@@ -67,7 +67,7 @@ const getClassNames = ({ast}: {ast: parser.ParseResult<File> | any}): string => 
  * console.log(inDict); // true
  * ```
  */
-function inDictionary(dictionary: Dictionary["shortKeys"] | Dictionary["shortValues"], shortKey: string): boolean  {
+export function inDictionary(dictionary: Dictionary["shortKeys"] | Dictionary["shortValues"], shortKey: string): boolean  {
   return Object.keys(dictionary).includes(shortKey);
 }
 
@@ -80,7 +80,7 @@ function inDictionary(dictionary: Dictionary["shortKeys"] | Dictionary["shortVal
  * console.log(classes); // [{fullClass: 'm-10', classKey: 'margin', classValue: '10px'}, ...]
  * ```
  */
-const filterClasses = (classes: string[]): utilityClass[] => {
+export function filterClasses (classes: string[]): utilityClass[] {
     const {acceptAnyVariable = false, acceptAnyKey = false, acceptAnyValue = true} = readConfigFile()
     let utilityClasses: utilityClass[] = [];
   
@@ -144,7 +144,7 @@ const filterClasses = (classes: string[]): utilityClass[] => {
     return utilityClasses;
 }
 
-const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: string}) => {
+export function writeCSS ({classes, filePath}: {classes: utilityClass[], filePath: string}) {
     let utilitiesCSS: string = '';
 
     // 3 Format utilityClass into .CSS
@@ -161,7 +161,7 @@ const writeCSS = ({classes, filePath}: {classes: utilityClass[], filePath: strin
     fs.writeFileSync(filePath, utilitiesCSS);
 }
 
-function readDir(dir: string, exclude: string[] = []): any {
+export function readDir(dir: string, exclude: string[] = []): any {
   return fs.readdirSync(dir, { withFileTypes: true })
     .filter((dirent: fs.Dirent) => !exclude.includes(dirent.name))
     .flatMap((dirent: fs.Dirent) => {
@@ -170,7 +170,7 @@ function readDir(dir: string, exclude: string[] = []): any {
     });
 }
 
-const getFilePaths = (dir: string): string[] => {
+export function getFilePaths (dir: string): string[]  {
     const {extensions = "tsx,ts,js,jsx", exclude = ["node_modules", ".git"]} = readConfigFile()
     
     let files: string[] = [];
@@ -183,7 +183,7 @@ const getFilePaths = (dir: string): string[] => {
     return files;
 }
 
-const generateAST = (filePath: string): parser.ParseResult<File> | any => {
+export function generateAST (filePath: string): parser.ParseResult<File> | any {
   const code = fs.readFileSync(filePath, 'utf-8');
 
   // Parse the code
@@ -214,7 +214,7 @@ interface Config {
   exclude?: string[];
 }
 
-function readConfigFile(): Config {
+export function readConfigFile(): Config {
   const filePath = "./cuconfig.json";
   try {
     const data = fs.readFileSync(filePath, 'utf8');
@@ -224,6 +224,3 @@ function readConfigFile(): Config {
     return {};
   }
 }
-
-export type { utilityClass }
-export { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile }
