@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import * as path from 'path';
-import { executeScript, pathTo } from "@/utils";
-import ProcessRetriever from "./Process";
-import commandsMap from "./constants";
+import path from 'path';
+// Local
+import { executeScript, pathTo, ProcessRetriever } from "@/utils";
+import {commandsMap} from "./constants";
 
 const cli = new ProcessRetriever(process, commandsMap);
 

@@ -1,5 +1,5 @@
-import * as path from 'path';
-import * as fs from 'fs';
+import path from 'path';
+import fs from 'fs';
 import readline from 'readline';
 
 /** Absolute paths from user to root | package */

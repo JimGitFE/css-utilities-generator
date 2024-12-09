@@ -1,5 +1,14 @@
 import { readConfigFile } from "./utils/css";
 
+/** Commands to Action, [isExecutable, pathToExecutable | log text] */
+const commandsMap: CommandsMap = {
+    'init': { short: "-i", action: [true, 'dist/cli/command/init.js'] },
+    'generate': { short: "-g", action: [true, 'dist/cli/command/generator.js'] },
+    'check': { short: "-c", action: [true, 'dist/cli/command/check.js'] },
+    'watch': { short: "-w", action: [true, 'dist/cli/command/watch.js'] },
+    'help': { short: "-h", action: [false, 'Help\n Available commands:\n- init\n- generate\n- check'] }
+} as const;
+
 /* User Config (sourced from cuconfig.json) */
 const units  = readConfigFile().units || "px"; 
 const { extendKeys, extendValues } = readConfigFile()
@@ -148,4 +157,4 @@ const dictionary: Dictionary  = {
 } as const
 
 const [shortKeys, shortValues]: [Dictionary["shortKeys"], Dictionary["shortValues"]] = [{...dictionary.shortKeys, ...extendKeys}, {...dictionary.shortValues, ...extendValues}];
-export { shortKeys, shortValues };
+export { shortKeys, shortValues, commandsMap };

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
+// Local
 import { addScriptToPackageJson, writeFileInRoot, askUser, isValidPath } from '@/utils';
 
 /** Default configuration */

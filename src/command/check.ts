@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+/** Generate utils and compare with current */
+import fs from 'fs';
+// Local
 import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion } from '@/utils';
 
 /** run utils welcome - current version */
@@ -26,5 +29,19 @@ const rawClasses: string[] = filePaths.reduce((acc: string[], path) => {
 // 2 Filter utility classes, ex. "flex d-f ml-20" => "d-f ml-20"
 const classes = filterClasses(rawClasses)
 
-// 3 Translate to CSS & writeTo path
-writeCSS({classes, filePath: writeTo})
+let generatedCSS: string = '';
+
+// 3 Format utilityClass into .CSS
+classes.forEach(({ fullClass, classKey, classValue }) => {
+  generatedCSS += `.${fullClass} { ${classKey}: ${classValue}; }\n`;
+});
+
+const currentCSS = fs.readFileSync(writeTo, 'utf-8').trim();
+
+if (currentCSS.replace(/\s+/g, '') === generatedCSS.replace(/\s+/g, '')) {
+    console.log('Generated css utilities are up to date.')
+    process.exit(0)
+} else {
+    console.error('Generated css utilities are outdated.')
+    process.exit(1)
+}
