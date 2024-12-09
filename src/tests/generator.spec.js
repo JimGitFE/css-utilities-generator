@@ -1,5 +1,5 @@
-// const { filterClasses } = require("../../dist/utils");
-import { filterClasses } from "../utils";
+const { filterClasses } = require("../../dist/utils/css.js");
+// import { filterClasses } from "../utils";
 // Config: empty
 
 test("Numeric Values", () => {

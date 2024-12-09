@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import * as path from "path";
 // Local
-import { executeScript, pathTo } from "@/utils";
+import { pathTo } from "./utils/cli";
+import { executeScript } from "./utils/cli-unsafe";
 import ProcessRetriever from "./Process";
 import { commandsMap } from "./constants";
 

@@ -1,4 +1,4 @@
-import { readUserConfig } from "@/tests/uts";
+import { readUserConfig } from "./utils/cli";
 
 /** Commands to Action, [isExecutable, pathToExecutable | log text] */
 const commandsMap: CommandsMap = {

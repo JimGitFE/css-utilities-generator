@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
 // Local
-import { readUserConfig } from "@/utils";
+import { readUserConfig } from "../utils/cli";
 
 const { exclude = [], readFrom = "./", extensions = "tsx,ts,js,jsx" } = readUserConfig();
 
@@ -20,7 +20,7 @@ const nodemonProcess = spawn(
     {
         stdio: "inherit",
         shell: true,
-    },
+    }
 );
 
 nodemonProcess.on("error", (err) => {

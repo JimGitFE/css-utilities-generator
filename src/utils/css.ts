@@ -4,7 +4,7 @@ import parser from "@babel/parser";
 import traverse from "@babel/traverse";
 // Local
 import { shortKeys, shortValues } from "../constants";
-import { readUserConfig } from "@/utils";
+import { readUserConfig } from "./cli";
 
 /**
  * 1 Return absolute paths to all files with matching extensions from user config.

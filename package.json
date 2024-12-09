@@ -7,8 +7,8 @@
     "scripts": {
         "postinstall": "npm install -g nodemon",
         "build": "rimraf -rf ./dist/ && tsc",
-        "test": "jest",
-        "ts-test": "ts-node src/tests/playground.ts",
+        "test": "npm run build && jest",
+        "ts-test": "ts-node tests/playground.ts",
         "git-test": "jest",
         "rm-config": "rimraf -rf ./cuconfig.json"
     },
@@ -52,24 +52,18 @@
     },
     "homepage": "https://github.com/JimGitFE/css-utilities-generator#readme",
     "devDependencies": {
-        "@babel/core": "^7.26.0",
-        "@babel/preset-env": "^7.26.0",
-        "@babel/preset-typescript": "^7.26.0",
         "@types/babel__generator": "^7.6.8",
         "@types/babel__traverse": "^7.20.5",
-        "@types/jest": "^29.5.14",
         "@types/node": "^22.0.0",
         "jest": "^29.7.0",
         "rimraf": "^6.0.1",
-        "ts-jest": "^29.2.5",
         "ts-node": "^10.9.2",
-        "typescript": "^5.7.2"
+        "typescript": "^5.5.3"
     },
     "dependencies": {
         "@babel/generator": "^7.24.5",
         "@babel/parser": "^7.24.5",
         "@babel/traverse": "^7.24.5",
-        "nodemon": "^3.1.7",
-        "prettier": "^3.4.2"
+        "nodemon": "^3.1.7"
     }
 }

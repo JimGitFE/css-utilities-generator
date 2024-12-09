@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import chalk from "chalk";
 // Local
-import { addScriptToPackageJson, writeFileInRoot, askUser, isValidPath } from "@/utils";
+import { askUser, isValidPath } from "../utils/cli";
+import { addScriptToPackageJson, writeFileInRoot } from "../utils/cli-unsafe";
 
 /** Default configuration */
 let cuconfig = {
@@ -40,7 +41,7 @@ let cuconfig = {
                 console.log(`${chalk.gray(`Watch path defaulted to `)}${chalk.white.italic.bold("./")} \n`);
                 return cuconfig.readFrom;
             }
-        },
+        }
     );
     cuconfig.readFrom = watchPath; // Update cuconfig
 
@@ -56,7 +57,7 @@ let cuconfig = {
                 console.log(`${chalk.gray(`CSS file destination defaulted to `)}${chalk.white.italic.bold(cuconfig.writeTo)} \n`);
                 return cuconfig.writeTo;
             }
-        },
+        }
     );
     cuconfig.writeTo = writePath; // Update cuconfig
 
@@ -69,6 +70,8 @@ let cuconfig = {
     console.log(`    ${chalk.cyan.bgBlack.bold("npm run utils")} \n`);
     console.log(`    or ${chalk.cyan.bgBlack.bold("npx css-utils generate")} for one time generation \n`);
     console.log(
-        `    ${chalk.yellow.dim.italic(`Important!`)} ${chalk.bold(`Import ${cuconfig.writeTo} at your main HTML/JavaScript/TypeScript file`)} \n`,
+        `    ${chalk.yellow.dim.italic(`Important!`)} ${chalk.bold(
+            `Import ${cuconfig.writeTo} at your main HTML/JavaScript/TypeScript file`
+        )} \n`
     );
 })();

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Local
-import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readUserConfig, packageVersion } from "@/utils";
+import { readUserConfig, packageVersion } from "../utils/cli";
+import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS } from "../utils/css";
 
 /** run utils welcome - current version */
 console.log(`\nUtility CSS Generator v${packageVersion()}\n`);

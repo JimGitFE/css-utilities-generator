@@ -1,7 +1,7 @@
 import * as path from "path";
 import * as fs from "fs";
 // Local
-import { pathTo } from "@/utils";
+import { pathTo } from "./cli";
 
 /** Write file in user root (dep: initialization of cuconfig.json) */
 export function writeFileInRoot(fileName: string, file: any) {

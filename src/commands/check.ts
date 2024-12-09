@@ -2,7 +2,8 @@
 /** Generate utils and compare with current */
 import * as fs from "fs";
 // Local
-import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readUserConfig, packageVersion } from "@/utils";
+import { readUserConfig, packageVersion } from "../utils/cli";
+import { getFilePaths, generateAST, getClassNames, filterClasses } from "../utils/css";
 
 /** run utils welcome - current version */
 console.log(`\nUtility CSS Generator v${packageVersion()}\n`);
