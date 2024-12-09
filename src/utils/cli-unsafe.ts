@@ -1,4 +1,4 @@
-import { pathTo } from "./";
+import { pathTo } from "@/utils";
 import * as path from 'path';
 import * as fs from 'fs';
 

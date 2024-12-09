@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import * as parser from '@babel/parser';
 import traverse from "@babel/traverse";
-import { shortKeys, shortValues } from '../dictionary';
+import { shortKeys, shortValues } from '@/dictionary';
 
 interface utilityClass {
     fullClass: string, // The raw input class name, ex. 'm-10'

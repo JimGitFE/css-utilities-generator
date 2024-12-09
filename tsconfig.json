@@ -27,6 +27,10 @@
     
     /* Completeness */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+    "baseUrl": ".",                                      /* Base directory to resolve non-relative module names. */
+    "paths": {
+      "@/*": ["src/*"]                                /* Alias '@src' to 'src' directory. */
+    },
     
     "lib": ["es2016", "dom"], // array.includes wasnt supported
     "types": [ "node" ],

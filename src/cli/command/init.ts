@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
-import { addScriptToPackageJson, writeFileInRoot, askUser, isValidPath } from '../../utils';
+import { addScriptToPackageJson, writeFileInRoot, askUser, isValidPath } from '@/utils';
 
 /** Default configuration */
 let cuconfig = {

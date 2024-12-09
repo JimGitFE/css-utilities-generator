@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Generate utils and compare with current */
 import * as fs from 'fs';
-import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion } from '../../helpers';
+import { getFilePaths, generateAST, getClassNames, filterClasses, writeCSS, readConfigFile, packageVersion } from '@/utils';
 
 /** run utils welcome - current version */
 console.log(`\nUtility CSS Generator v${packageVersion()}\n`);
